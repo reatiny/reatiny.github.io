@@ -2,114 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://reatiny.github.io/</loc>
+    <loc>https://reatiny.github.io/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://reatiny.github.io/en/"
+                href="https://reatiny.github.io/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://reatiny.github.io/"
+                href="https://reatiny.github.io/"
                 />
   </url><url>
-    <loc>http://reatiny.github.io/tags/markdown/</loc>
+    <loc>https://reatiny.github.io/tags/markdown/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/post/placeholder-text/</loc>
+    <loc>https://reatiny.github.io/post/placeholder-text/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/post/</loc>
+    <loc>https://reatiny.github.io/post/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/</loc>
+    <loc>https://reatiny.github.io/tags/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://reatiny.github.io/en/tags/"
+                href="https://reatiny.github.io/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://reatiny.github.io/tags/"
+                href="https://reatiny.github.io/tags/"
                 />
   </url><url>
-    <loc>http://reatiny.github.io/tags/text/</loc>
+    <loc>https://reatiny.github.io/tags/text/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/css/</loc>
+    <loc>https://reatiny.github.io/tags/css/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/featured/</loc>
+    <loc>https://reatiny.github.io/tags/featured/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/html/</loc>
+    <loc>https://reatiny.github.io/tags/html/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/post/markdown-syntax/</loc>
+    <loc>https://reatiny.github.io/post/markdown-syntax/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/series/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://reatiny.github.io/en/series/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="http://reatiny.github.io/series/"
-                />
-  </url><url>
-    <loc>http://reatiny.github.io/categories/syntax/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://reatiny.github.io/tags/themes/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://reatiny.github.io/series/themes-guide/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://reatiny.github.io/categories/</loc>
+    <loc>https://reatiny.github.io/series/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://reatiny.github.io/en/categories/"
+                href="https://reatiny.github.io/en/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://reatiny.github.io/categories/"
+                href="https://reatiny.github.io/series/"
                 />
   </url><url>
-    <loc>http://reatiny.github.io/tags/privacy/</loc>
+    <loc>https://reatiny.github.io/categories/syntax/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://reatiny.github.io/tags/themes/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://reatiny.github.io/series/themes-guide/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://reatiny.github.io/categories/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reatiny.github.io/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://reatiny.github.io/categories/"
+                />
+  </url><url>
+    <loc>https://reatiny.github.io/tags/privacy/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/post/rich-content/</loc>
+    <loc>https://reatiny.github.io/post/rich-content/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/shortcodes/</loc>
+    <loc>https://reatiny.github.io/tags/shortcodes/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/post/math-typesetting/</loc>
+    <loc>https://reatiny.github.io/post/math-typesetting/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/emoji/</loc>
+    <loc>https://reatiny.github.io/tags/emoji/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/post/emoji-support/</loc>
+    <loc>https://reatiny.github.io/post/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/about/</loc>
+    <loc>https://reatiny.github.io/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://reatiny.github.io/tags/index/</loc>
+    <loc>https://reatiny.github.io/tags/index/</loc>
   </url><url>
-    <loc>http://reatiny.github.io/archives/</loc>
+    <loc>https://reatiny.github.io/archives/</loc>
   </url>
 </urlset>
