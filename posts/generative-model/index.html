@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ray" />
+	
+	
+	
+	<title>Generative Model ｜ Ray</title>
+	
+    
+    
+    <meta name="description" content="Generative Model Generation Network as Generator 之前所学过的神经网络，都是一个function，输入一个X输出一个Y。我们已经知道各式各样的network，可以处理不同的输入X和输出Y。 我们学到的输入X：可以是一张图片，可以是一个seq" />
+    
+
+    
+    
+    <meta name="keywords" content="Hugo, theme, zozo" />
+    
+
+	
+    
+    <link rel="shortcut icon" href="http://localhost:1313/images/favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/zozo.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/highlight.css" />
+
+    
+    
+</head>
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/posts/">Archive</a>
+            </li>
+            
+            <li>
+                <a href="/tags/">Tags</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        <a id="menu_icon"><i class="ri-menu-line"></i></a>
+    </div>
+</div>
+        <div class="header animated fadeInDown">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="http://localhost:1313/">
+                    <span>Ray</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title">the site subtitle</p>
+            <div class="my_socials">
+                
+                
+                <a href="%20" title="facebook" target="_blank"><i class="ri-facebook-fill"></i></a>
+                
+                
+                
+                <a href="https://github.com/reatiny" title="github" target="_blank"><i class="ri-github-fill"></i></a>
+                
+                
+                
+                <a href="%20" title="instagram" target="_blank"><i class="ri-instagram-fill"></i></a>
+                
+                
+                
+                <a href="%20" title="twitter" target="_blank"><i class="ri-twitter-fill"></i></a>
+                
+                
+                
+                <a href="%20" title="weibo" target="_blank"><i class="ri-weibo-fill"></i></a>
+                
+                
+                <a href="http://localhost:1313/index.xml" type="application/rss+xml" title="rss" target="_blank"><i
+                        class="ri-rss-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="content">
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/posts/generative-model/'>Generative Model</a></h2>
+                        <span class="date">2019.03.31</span>
+                    </div>
+                    <div class="post_content markdown"><h1 id="generative-model">Generative Model</h1>
+<h2 id="generation">Generation</h2>
+<h3 id="network-as-generator">Network as Generator</h3>
+<p>之前所学过的神经网络，都是一个function，输入一个<em>X</em>输出一个<em>Y</em>。我们已经知道各式各样的network，可以处理不同的输入<em>X</em>和输出<em>Y</em>。</p>
+<p>我们学到的输入<em>X</em>：可以是一张图片，可以是一个sequence</p>
+<p>我们学到的输出<em>Y</em>：可以是一个数值，可以是一个类别，也可以是一个sequence</p>
+<p>接下来我们要进入一个新的主题：生成。我们把network,当做一个==generator==来用，特别地，会在network的输入上再加一个随机变量<em>Z</em>，这个变量是从某个分布sample出来；随着sample到的Z不同,Y的输出也就不一样,所以这个时候我们的network输出,不再是单一一个固定的东西,而变成了一个复杂的distribution。<strong>这种可以输出,一个distribution的network,我们就叫它==generator==。</strong></p>
+<img src="images/image-20210727182022779.png" alt="image-20210727182022779" style="zoom: 50%;" />
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="images/image-20210727182022779.png">
+<img src="images/image-20210727182022779.png" alt="image-20210727182022779.png"  />
+</a>
+</div>
+
+</p>
+<p>那network怎么同时处理X与Z呢，有很多方法，取决于你的network架构。例如，把X和Z两个向量直接拼接成一个更长的向量作为输入；或者当X和Z的长度相同时将它们相加作为输入等等。</p>
+<p>Z的特别之处在于它是<strong>不固定</strong>的，每一次我们用这个network的时候,都会随机生成一个Z，所以Z每次都不一样，它是从一个distribution里面sample出来的。我们要求这个分布足够简单，我们知道这个式子，<strong>这样我们才能sample，我们仅仅做sample就可以了。</strong></p>
+<h3 id="why-distribution">Why distribution</h3>
+<p>为什么需要generator输出是一个分布呢，我们看以下这个场景。</p>
+<img src="images\image-20210727192034535.png" alt="image-20210727192034535" style="zoom:50%;" />
+<p>小精灵这个游戏，预测接下来的游戏画面，给你的network过去的游戏画面,然后它的输出就是新的游戏画面,下一秒的下一个时间点。如果用过去学过的network training的方法，Supervise learning train下去，我们会发现奇怪的现象：小精灵走着走着，到转角的时候居然分裂了，有时候走着走着还会消失，这是怎么回事呢？</p>
+<p>因为我们的训练集里面一定会存在这样的样本，有时候同样的转角，有的小精灵左转，有的小精灵右转，所以我们的模型学到的就是两面讨好，同时向右向左转。这明显是我们不愿看到的结果，但是，对于同样的输入，我们希望它要么向左要么向右，怎么处理呢。一个想法就是让network的输出是有几率的，于是我们的任务被赋予了一点==创造力==，<strong>找一个function,但是同样的输入有多种可能的输出,而这些不同的输出都是对的</strong></p>
+<img src="images\image-20210727193953453.png" alt="image-20210727193953453" style="zoom:50%;" />
+<p>例如，画图这件事情，可能就需要一些创造力。画一个红眼睛的角色，那每个人可能画出来，或者心里想的动画人物都不一样，这种时候，我们就需要<strong>generative model</strong>。</p>
+<h2 id="generative-adversarial-network-gan">Generative Adversarial Network (GAN)</h2>
+<p>我们先来看一个让机器生成二次元人物的脸的例子，这是一个Unconditional的generation，即输入没有X只有Z。</p>
+<img src="images\image-20210727205556156.png" alt="image-20210727205556156" style="zoom:50%;" />
+<p>我们假设<strong>Z是从一个normal distribution里sample出来的向量</strong>，这个向量通常会是一个<strong>low-dimensional</strong>的向量，它的维度其实是你自己决定的。那到底generator要输出什么样的东西，才是一个二次元人物的人脸，其实这个问题没有你想像的那么困难，一张图片就是一个非常高维的向量，所以generator实际上做的事情，就是产生一个非常高维的向量。</p>
+<p>当你输入的向量不同的时候，你的输出就会随之改变。你从normal distribution里Sample出不同的Z，输出的Y都不一样，我们希望不管你这边sample到什么Z，输出来的都是动画人物的脸。</p>
+<p>关于为什么是normal distribution，其实<strong>不同的distribution之间的差异,可能并没有真的非常大</strong>，我们只需要挑选一个简distribution即可，因为我们的<strong>generator会想办法,把这个简单的distribution,对应到一个复杂的distribution</strong>。</p>
+<h3 id="discriminator">Discriminator</h3>
+<p>在GAN里，除了==generator==，我们还需要训练一个network，叫做==discriminator==。</p>
+<img src="images\image-20210727212228539.png" alt="image-20210727212228539" style="zoom:50%;" />
+<p>discriminator它会拿一张图片作为输入，输出是一个数值，这个数值越大，就说明输入的图片<strong>越像是真实的二次元人物的图像</strong>。例如，如果输出的是逼真的二次元人物，则输出1（假设1是最大值）；如果输出的照片什么也不是，则输出0.1。</p>
+<img src="images\image-20210727212539056.png" alt="image-20210727212539056" style="zoom:50%;" />
+<p>需要说明的是，无论是==generator==，还是==discriminator==，都是<strong>neural network</strong>，它们的架构长什么样子，你完全可以自己设计，可以用CNN也可以用transformer ，只要能满足你所需的输入输出即可。</p>
+<h3 id="basic-idea-of-gan">Basic Idea of GAN</h3>
+<p>那么，为什么需要一个==discriminator==呢，这里有一个关于演化的例子。</p>
+<img src="images\image-20210727213223129.png" alt="image-20210727213223129" style="zoom:50%;" />
+<p>枯叶蝶原来也是美丽的，五彩斑斓的蝴蝶，在物竞天择的压力下，不断学习，一步一步朝着躲避天敌的方向演化。这个例子对应到GAN ，枯叶蝶是generator，它的天敌是discriminator。</p>
+<p>回到生成二次元人物头像的例子，generator学习画出二次元的人物过程如下：</p>
+<img src="images\image-20210727214120362.png" alt="image-20210727214120362" style="zoom:50%;" />
+<p>v1的<strong>generator</strong>的参数是随机的，它根本就不知道如何画二次元的人物，所以它画出来的东西就是一些莫名其妙的杂讯。那<strong>discriminator</strong>接下来，它学习的目标是要<strong>分辨generator的输出，跟真正的图片的不同</strong>，那在这个例子中可能非常容易，discriminator来说它只要看说，它或许可以看图片里面有没有两个黑黑的圆球，就是眼睛，有眼睛就是真正的二次元人物，没有眼睛就generator产生的。接下来<strong>generator就调整它的裡面的参数</strong>，generator就<strong>进化</strong>了，它调整的目标是为了要骗discriminator，discriminator判断一张图片是不是真实的依据是有没有眼睛，那generator就产生眼睛出来给discriminator看，v2的<strong>generator</strong>骗过了v1discriminator。然而discriminator也是会进化的，通过调整参数，v2的discriminator判断图片的依据更加严格，或许除了照片中包含眼睛还需要有头发耳朵，于是v2的<strong>generator</strong>骗不过了，还需要进化，如此两个network经过多轮迭代后generator输出的图片，就可以越来越像二次元的人物。</p>
+<p>GAN是由Ian Goodfellow在14年的paper中首先提出的，在GAN原始的pape里，他把generator和discriminator当作是敌人。还有一些网路文章会举例说，generator是假钞，discriminator是警察，警察要抓做假钞的人，假钞就会越来越像，警察就会越来越厉害等等。generator和discriminator中间有一个<strong>对抗的关係</strong>，所以就有了==adversarial==这个字眼。</p>
+<p>鉴于generator和discriminator的不断对抗和演化，我们可以任性地把他们<strong>写作敌人，念作朋友。</strong></p>
+<h3 id="algorithm">Algorithm</h3>
+<p>如何训练==generator==和==discriminator==，我们先假设generator和discriminator的参数已经初始化。</p>
+<h4 id="step-1-fix-generator-gand-update-discriminator-d">Step 1: Fix generator G，and update discriminator D</h4>
+<img src="images\image-20210727230248521.png" alt="image-20210727230248521" style="zoom:50%;" />
+<p>初始化完以后,接下来训练的<strong>第一步</strong>是,<strong>固定住generator，只train discriminator</strong>。第一次generator产生的图片呢一定是杂讯，然后我们将真正的二次元人物的头像和generator产生的结果去训练discriminator。它训练的目标是要分辨真正的二次元人物和generator产生的二次元人物的差异。具体我们可能会这样操作，把真正的人物都标1，generator产生出来的图片都标0。</p>
+<p>对于discriminator来说，这就是一个<strong>分类的问题</strong>，或者是<strong>regression的问题</strong>，总之discriminator的任务，就是去分辨这个real的image和产生出来的image之间的差异。</p>
+<h4 id="step-2-fix-discriminator-d-and-update-generator-g">Step 2: Fix discriminator D, and update generator G</h4>
+<img src="images\image-20210727234256973.png" alt="image-20210727234256973" style="zoom:50%;" />
+<p>我们训练完discriminator以后，接下来<strong>定住discriminator改成训练generator</strong>。generator训练的目标是让discriminator的输出值越大越好。因为discriminator可以做的事情就是，看到好的图片就给它大的分数，如果generator调整参数之后输出来图片，Discriminator会给予高分，那说明generator产生的图片越好。更具体一点，实际上的操作是，<strong>Generator</strong>是一个network里面有好几层**，Discriminator也是一个network里面有好几层**，我们把<strong>generator和Discriminator直接接起来,当做一个比较大的network来看待</strong>，整个大的network里面，其中某一层的输出就是代表一张图片。不能忘记的是这个大的network最后几层**（discriminator部分）的参数是不能调的。</p>
+<p>这一步中训练的方法，也是gradient descent，和我们训练一个一般network是没有差异的。</p>
+<p>以上两个步骤反复训练，discriminator和generator都会做得越来越好。</p>
+<h3 id="theory-behind-gan">Theory behind GAN</h3>
+<p>这一部分会阐述<strong>Generator 和 Discriminator 互动</strong>的背后到底在做什么。</p>
+<p>回顾一下，我们想要优化的问题，我们有一个generator：</p>
+<ol>
+<li>给generator输入一大堆的vector，以及Normal Distribution Sample。</li>
+<li>Generator处理以后会产生一个比较复杂的distribution，我们记作PG。</li>
+<li>真正的 Data 也形成了另外一个 distribution，我们记作Pdata。我们希望<strong>PG 跟 Pdata 越接近越好</strong>。</li>
+</ol>
+<h4 id="our-objective">Our Objective</h4>
+<img src="images\image-20210728124054870.png" alt="image-20210728124054870" style="zoom:50%;" />
+<p>我们的目标是寻找一组generator的参数，使得它产生的PG与真实数据Pdata差距越小越好，两个分布之间的差距我们可以定义为：==Divergence==(散度)。</p>
+<img src="images\image-20210728124510684.png" alt="image-20210728124510684" style="zoom: 67%;" />
+<p>新的问题又随之产生了，普通的损失函数可以微分，这种分布的Divergence微分是要怎么算呢？实际上我们根本没有办法把这个Divergence算出来，更别说去最小化它了。但是**==GAN==有一个很神奇的做法,它==可以突破,我们不知道如何计算 Divergence 的限制。==**</p>
+<h4 id="sampling---discriminator">Sampling  &amp; Discriminator</h4>
+<p>GAN的想法是，<strong>不需要知道PG跟Pdata它们实际上的 Formulation <strong>，只要能</strong>从PG和Pdata这两个Distributions Sample东西出来,就有办法解决Divergence</strong>。</p>
+<img src="images\image-20210728162332571.png" alt="image-20210728162332571" style="zoom:50%;" />
+<p>PG和Pdata是如何sample的呢？从图库中随机选出一些照片，就得到了Pdata；从Normal Distribution中Sample一堆 Vector出来给 generator，让generator产生图片，这些图片就是从PG中Sample出来的结果。总之，我们有办法从PG和Pdata中sample。</p>
+<p>sample这一步之后，接下来我们需要依靠Discriminator的力量。</p>
+<img src="images\image-20210728164850337.png" alt="image-20210728164850337" style="zoom: 67%;" />
+<p>Discriminator训练的目标是分辨真的图跟生成的图，所以看到真的图给它高分，看到生成的图给它低分。实际上，你可以把它写成式子，把它当做是以下的Optimization的问题，我们直接给出。这个Discriminator可以去<strong>Maximize</strong>某一个 Function，叫做 ==Objective Function==（我们要 <strong>Maximize</strong> 的东西,我们会叫<strong>Objective Function</strong>，如果<strong>Minimize</strong>我们就叫它 <strong>Loss Function</strong>）</p>
+<img src="images\image-20210728165445765.png" alt="image-20210728165445765" style="zoom: 67%;" />
+<p>我们希望这个<strong>Objective Function</strong>越大越好，通过观察，如果希望<strong>Objective Function</strong>越大，<strong>意味着Y如果是从Pdata Sample出来的,D(Y)就要越大越好</strong>，<strong>而Y如果是从PG Sample出来的,D(Y)就要越小越好</strong>。</p>
+<p>直接给出的这个式子你一定觉得奇怪，实际上<strong>Objective Function</strong>不一定是以上的式子，完全有其他写法，只不过这是最早的写法，有一个明确的目的，是为了要把<strong>Discriminator和Binary Classification</strong>联系上。</p>
+<img src="mages\image-20210728170826752.png" alt="image-20210728170826752" style="zoom:67%;" />
+<p>事实上这个Objective Function就是<strong>Cross Entropy乘一个负号</strong>，我们<strong>Maximize Cross Entropy乘一个负号</strong>的时候，其实就是<strong>Minimize Cross Entropy</strong>，就是等同于是在**训练一个 Classifier*，这个Classifier它做的事情就是把Pdata Sample出来的真实的 Image当作 Class 1，把从PG Sample出来的这些假的Image当作 Class 2。</p>
+<p>问题的神奇之处在于，<strong>maxV(D, G</strong>)这个数值，它和JS Divergence有关系。李宏毅老师觉得，最原始的GAN的paper里，想法可能真的是从Binary Classifier起源的。一开始把Discriminator写成 Binary Classifier，然后有了这样的 Objective Function，然后再经过一番推导以后，求可以让Objective Function最大的D，这个最大的值跟JS Divergence是有关的。</p>
+<p>我们从直观上理解下，为什么这个<strong>Objective Function的最大值，会跟 Divergence 有关</strong>。（详细的证明见 GAN 原始的 Paper）</p>
+<img src="images\image-20210728182734735.png" alt="image-20210728182734735" style="zoom:50%;" />
+<p>我们可以这样考虑，假设PG和Pdata之间的divergence很小，也就是<strong>PG和data 很像</strong>，这个时候discriminator较难进行分类，所以你没有办法让这个 Objective 的值非常大；如果PG和Pdata之间的divergence很大，也就是<strong>PG和data 很不像</strong>，这个时候discriminator可以将它们轻易分开，Objective Function 的 Maximum可以很大。</p>
+<p>回到最初的问题，我们不知道如何计算divergence，现在我们只需要训练一个discriminator，训练完以后，这个Objective Function的最大值，就和Divergence有关。所以经过替换，我们可以得到下面的式子。</p>
+<img src="images\image-20210728184213786.png" alt="image-20210728184213786" style="zoom:67%;" />
+<p>我们要找一个G,让红框框里面的值最小，这个 G 就是我们要的Generator，而Generator 和 Discriminator互动，互相欺骗这个过程，其实就是解这样一个有Minimize又有Maximize 的Min Max问题，就是通过下面这一个GAN的理论来解的。</p>
+<img src="images\image-20210728184625699.png" alt="image-20210728184625699" style="zoom:50%;" />
+<p>需要补充的是，Divergence有很多，不同Divergence可以设计出不同的object function。<a href="https://arxiv.org/abs/1606.00709%E9%9D%A2%E9%83%BD%E6%9C%89%E8%AF%A6%E7%BB%86%E7%9A%84%E8%AE%B0%E8%BD%BD">这篇文章</a>里有详细的记载。</p>
+<img src="images\image-20210728185024049.png" alt="image-20210728185024049" style="zoom:50%;" />
+<h4 id="tips-for-gan">Tips for GAN</h4>
+<p>GAN训练的小技巧非常多，有一个最知名的就是==WGAN==。但是我们先说<strong>JS Divergence 有什么样的问题</strong>，在最早的 GAN 里要 Minimize 的是 JS Divergence，JS Divergence有什么不好的地方呢？</p>
+<h5 id="js-divergence-is-not-suitable">JS divergence is not suitable</h5>
+<p>我们需要知道的是，<strong>PG 和 Pdata 它们重叠的部分往往非常少</strong>，原因有以下两点：</p>
+<ol>
+<li>数据自身的特性：图片其实是高维空间裡面的一个低维的 Manifold(<strong>流形</strong>），高维空间中的低维相交的范围是可以忽略的，除非重合。</li>
+<li>PG 和 Pdata的分布未知，我们的动作只有sample，而且sample的数目没有足够多，难以重叠</li>
+</ol>
+<img src="images\image-20210728200751900.png" alt="image-20210728200751900" style="zoom:50%;" />
+<p>而JS Divergence 有个特性，是<strong>两个没有重叠的分布，JS Divergence 永远都是 Log2</strong>。</p>
+<img src="images\image-20210728201002895.png" alt="image-20210728201002895" style="zoom:67%;" />
+<p>我们本来期待，这个discriminator的Loss，这个 Binary Classifier Loss，也许代表着，Loss 越来越大，代表问题越来越难，代表我们的 Generated Data和Real 的 Data 越来越接近。但实际上操作的时候你<strong>根本观察不到这个现象</strong>，这个 Binary Classifier <strong>训练完的 Loss根本没有意义</strong>，因为它总是可以让正确率变到 100%，两组 Image 都是 Sample 出来的，它硬背都可以得到 100% 的正确率，根本就没有办法看出Generator有没有越来越好。</p>
+<p>JS Divergence 有天生的缺陷，那有人就会说，会不会**换一个衡量两个 Distribution 的相似程度的方式，换一种 Divergence就可以解决这个问题了，于是就有了这个==Wasserstein Distance== 的想法</p>
+<h5 id="wasserstein-distance">Wasserstein distance</h5>
+<p>Wasserstein distance的想法是，假设你有两个distribution：P和Q。想像你在开一台推土机（Earth Mover），把 P 想成是一堆土，把 Q 想成是要把土堆放的目的地，那这个推土机<strong>把 P 这边的土挪到 Q 所移动的平均距离</strong>，就是 <strong>Wasserstein Distance</strong>。</p>
+<img src="images\image-20210728202059014.png" alt="image-20210728202059014" style="zoom:67%;" />
+<p>上图的简单情形很好理解，但面对复杂的distribution的时候，把 P 变成 Q 的方法，是有非常多不同的方法，有各式各样不同的 Moiving Plan，用<strong>不同的 Moving Plan</strong>，<strong>推土机平均走的距离就不一样</strong>，这显然是一个优化问题。</p>
+<img src="images\image-20210728202923713.png" alt="image-20210728202923713" style="zoom:50%;" />
+<p>假设我们可以解决这个优化问题的话，训练中我们就可以知道Wasserstein Distance是越来越小的，我们的Generator是一点一点进步的。因为<strong>每次稍微把 PG 往 Pdata 挪近一点</strong>，W Distance 就会变化。</p>
+<img src="images\image-20210728203345790.png" alt="image-20210728203345790" style="zoom:50%;" />
+<h5 id="wgan">WGAN</h5>
+<p>用 Wasserstein Distance取代 JS Divergence 的时候，这个 GAN 就叫做 WGAN。</p>
+<p>如何计算Wasserstein Distance呢，直接给出结果，解如下的 Opimilazion 的 Problem，结果就是 Wasserstein Distance。</p>
+<img src="images\image-20210728213124991.png" alt="image-20210728213124991" style="zoom:50%;" />
+<p>但是这边<strong>还有另外一个限制</strong>，<strong>D 不能够是一个随便的 Function</strong>，D必须要是一个 1-Lipschitz 的 Function。通俗的理解是，1-Lipschitz要求Function不可以是变动很剧烈的 Function,它必须要是一个足够平滑的 Function。如果你没有做任何限制，只单纯要这边的值越大越好，这边的值越小越好，在蓝色的点跟绿色的点，也就是真正的 Image和Generated 的 Image，没有任何重叠的情况下，Discriminator 会给 Real 的 Image <strong>无限大的正值</strong>，给 Generated 的 Image <strong>无限大的负值</strong>。</p>
+<p>如何做到这个限制呢？最早使用 Wasserstein 的Paper，描述了一个比较粗糙的处理方法，Training 的时候，要求训练参数<strong>在 C 跟 -C</strong> 之间，超过C则为C，小于-C则为-C。但这个方法只是让Function变得平滑，<strong>并不一定真的让 Discriminator,变成 1-Lipschitz Function</strong>。</p>
+<p>还有一个想法叫做 Gradient Penalty，出自Improved WGAN 这篇 <a href="https://arxiv.org/abs/1704.00028">Paper</a>。想法是说在Real Data分布和Fake Data分布中各取一个sample，两点连线中间再取一个 Sample，要求这个点的 Gradient 接近1。这个想法也没有达到 1-Lipschitz 的限制。</p>
+<p>Spectral Normalization可以使D必须要是一个 1-Lipschitz 的 Function。<a href="https://arxiv.org/abs/1802.05957">论文</a>在这，如果你要 Train 非常好的 GAN，你可能会需要用到 Spectral Normalizaion。</p>
+<img src="images\image-20210728215116519.png" alt="image-20210728215116519" style="zoom:50%;" />
+<h4 id="no-pain-no-gan">NO PAIN NO GAN</h4>
+<p>Gan一直以来都是以难以训练而闻名的，它有一个本质上困难的地方，discriminator是要分辨产生的图片和真的图片的差异，generator是要产生假的图片来骗过discriminator。而事实上这两个 Network，它们是<strong>互相砥砺才能互相成长的</strong>，只要<strong>其中一者发生问题停止训练，另外一者就会随之停下训练</strong>，就会随之变差。</p>
+<img src="images\image-20210729201908245.png" alt="image-20210729201908245" style="zoom:50%;" />
+<p>很多Network，<strong>我们没有办法保证 Train 下去，它的 Loss 就一定会下降</strong>，你要让 Network Train 起来，往往你需要<strong>调一下 Hyperparameter</strong>，才有可能把它 Train 起来。Generator 和 Discriminator在 Train 的时候，它们必须要棋逢敌手。 GAN 本质上它的 Training仍然不是一件容易的事情，当然它是一个非常重要的技术，一个前瞻的技术。以下是一些Train GAN 的诀窍有关的文献。</p>
+<ul>
+<li><a href="https://github.com/soumith/ganhacks">Tips from Soumith</a></li>
+<li><a href="https://arxiv.org/abs/1511.06434">Tips in DCGAN: Guideline for network architecture design for image generation</a></li>
+<li><a href="https://arxiv.org/abs/1606.03498">Improved techniques for training GANs</a></li>
+<li><a href="https://arxiv.org/abs/1809.11096">Tips from BigGAN</a></li>
+</ul>
+<h3 id="gan-for-sequence-generation"><strong>GAN for Sequence Generation</strong></h3>
+<p>Train GAN 最难的是要用 GAN 来生成文字。如果你要生成一段文字，那你可能会有一个Sequence To Sequence 的 Model，有一个 Decoder会产生文字。Transformer 里这是一个 Decoder，那在 GAN 里，它就扮演了 Generator 的角色，负责产生文字。接下来就是要训练一个discriminator，discriminator,去判断说这段文字是真正的文字还是机器产生的文字，Decoder想办法去骗discriminator，Generato想办法去骗过 Discriminator。我们去调整generator的参数，想办法让Discriminator Output的分数越大。</p>
+<p>真正的<strong>难点</strong>在于，如果要用 <strong>Gradient Descent去 Train Decoder</strong>，去让 Discriminator Output 分数越大越好，这是<strong>做不到</strong>的。因为decoder的参数有一点<strong>小小的变化</strong>的时候，<strong>输出的这个 Distribution</strong>也会有<strong>小小的变化</strong>，因为这个变化很小，所以它<strong>不会影响最大</strong>的那一个 <strong>Token</strong>。（Token是人为设定的sequence的单位）</p>
+<img src="images\image-20210731210639265.png" alt="image-20210731210639265" style="zoom:50%;" />
+<p>Distribution 只有小小的变化，所以分数最大的那个 Token 是同一个，Discriminator 的<strong>输出的分数是一模一样的</strong>，输出的分数没有改变。所以你根本就没有办法算微分,你根本就<strong>没有办法做 Gradient Descent</strong>。（思考：为什么这个地方无法做gradient descent，CNN有Max Pooling，却可以做 Gradient Descent）。</p>
+<p>有一个解决问题的办法就是，遇到不能用 Gradient Descent Train 的问题，就当做 ==Reinforcement Learning== 的问题,硬做一下。但是Reinforcement Learning和GAN都是以难以训练著称，两者加起来变得更加难以训练。</p>
+<img src="images\image-20210731211601256.png" alt="image-20210731211601256" style="zoom:50%;" />
+<p>过去很长一段时间，用GAN去产生一段文字都被看做是一个非常大的难题。直到有一篇 Paper ScrachGAN。</p>
+<img src="images\image-20210731211953670.png" alt="image-20210731211953670" style="zoom:50%;" />
+<p>Form Scrach 就是<strong>不用 Pretrain</strong> 的意思。它可以直接<strong>从随机的初始化参数开始</strong>Train Generator，然后让 Generator 可以产生文字，它最<strong>关键的就是爆调 Hyperparameter，和一大堆的 Tips</strong>，比如，这个横轴是它们的 Major，这个叫做 <strong>FED</strong>，这个值<strong>越低越好</strong>。</p>
+<h3 id="evaluation-of-generation">Evaluation of Generation</h3>
+<p><strong>评估一个 Generator 的好坏并没有那么容易</strong>。很长一段时间，尤其是人们刚开始研究Generative的技术的时候，要评估 Generator 的好坏，都是人眼看， Paper里面没有 Accuracy，就是放几张图片，应该是比过去的文章都好，然后就结束了。</p>
+<img src="images\image-20210802083156306.png" alt="image-20210802083156306" style="zoom:50%;" />
+<p>完全用人眼看是不客观不稳定的。针对特定的任务，可以设计特定的方法，比如，使用GAN产生出来的图片，可以用影像分类系统来评判。影像分类系统输入是一张图片，输出是一个机率分布 P ( c│y ），如果这个机率的<strong>分布如果越集中</strong>，就说明产生的<strong>图片可能越好</strong>，因为输出的分布非常集中，代表影像分类系统非常肯定它看到的东西；如果产生的是一个四不像那个，那么系统就会非常困惑，它产生出来的几率分布就会非常平坦。</p>
+<h4 id="diversity---modezcollapse">Diversity - ModezCollapse</h4>
+<p>值得一提的是，用上述的方法，容易被一个叫 Mode Collapse 的问题欺骗，训练GAN的时候，你可能会遇到这样的状况。</p>
+<img src="images\image-20210802084217163.png" alt="image-20210802084217163" style="zoom:50%;" />
+<p>你会发现，GAN输出的照片来来去去就是那么几张，单看一张可能觉得还不错。我们会发现这种状况下一张脸越来越多，而且它有不同的发色。为什么会有这种 Mode Collapse的现象，直觉上理解，这是 Discriminator 的一个盲点，当 Generator 学会产生这种图片它就永远都可以骗过 Discriminator，Generator 抓到这个盲点就硬打一发，就发生 Mode Collapse 的状况。</p>
+<p>如何避免Mode Collapse的状况，今天<strong>其实还没有一个非常好的解答</strong>。</p>
+<h4 id="diversity---mode-dropping">Diversity - Mode Dropping</h4>
+<img src="images\image-20210802085920082.png" alt="image-20210802085920082" style="zoom:50%;" /></div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="http://localhost:1313/tags/theme/">theme</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                
+<div class="doc_comments">
+    <div class="comments_block_title">发表评论</div>
+    <div id="vcomments"></div>
+</div>
+
+<link rel="stylesheet" href="http://localhost:1313/css/comments.css" />
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+    new Valine({
+        el: '#vcomments',
+        appId: 'UATjYWOAAQ32uI8PyjojDFLA-gzGzoHsz',
+        appKey: 'GC5E5PsLk9lwL3jAad8c9ttn',
+        placeholder: ' ',
+        visitor: 'true',
+    })
+</script>
+                
+            </div>
+        </div>
+    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    <footer class="footer">
+    <div class="powered_by">
+        <a href="https://varkai.com">Designed by VarKai,</a>
+        <a href="http://www.gohugo.io/">Proudly published with Hugo</a>
+    </div>
+
+    <div class="footer_slogan">
+        <span>我尽力寻找出你将我灌醉于冬日的证据</span>
+    </div>
+</footer>
+    <script src="http://localhost:1313/js/jquery-3.5.1.min.js"></script>
+<link href="http://localhost:1313/css/fancybox.min.css" rel="stylesheet">
+<script src="http://localhost:1313/js/fancybox.min.js"></script>
+<script src="http://localhost:1313/js/zozo.js"></script>
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+</body>
+
+</html>
