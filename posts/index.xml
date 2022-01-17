@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>support vector machine</title>
+      <link>https://reatiny.github.io/posts/support-vector-machine/</link>
+      <pubDate>Sun, 23 May 2021 17:49:40 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/posts/support-vector-machine/</guid>
+      <description>支持向量机(support vector machine) 1、线性可分情况 将平行线插到的向量叫支持向量。 线性可分定义 一个训练集线性可分是指： ，使：对于 ,有： 若 ，则 若 ，则 （公式一） 优化问题 最小化（Minimize）： 限制条件（Su</description>
+    </item>
+    
+    <item>
       <title>Theme Preview</title>
       <link>https://reatiny.github.io/posts/theme-preview/</link>
       <pubDate>Sun, 31 Mar 2019 17:49:40 +0800</pubDate>

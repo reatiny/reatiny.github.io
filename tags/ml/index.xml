@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ml on Ray</title>
+    <link>https://reatiny.github.io/tags/ml/</link>
+    <description>Recent content in ml on Ray</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 23 May 2021 17:49:40 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/tags/ml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>support vector machine</title>
+      <link>https://reatiny.github.io/posts/support-vector-machine/</link>
+      <pubDate>Sun, 23 May 2021 17:49:40 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/posts/support-vector-machine/</guid>
+      <description>支持向量机(support vector machine) 1、线性可分情况 将平行线插到的向量叫支持向量。 线性可分定义 一个训练集线性可分是指： ，使：对于 ,有： 若 ，则 若 ，则 （公式一） 优化问题 最小化（Minimize）： 限制条件（Su</description>
+    </item>
+    
+  </channel>
+</rss>

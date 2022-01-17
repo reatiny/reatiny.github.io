@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ray" />
+	
+	
+	
+	<title>support vector machine ｜ Ray</title>
+	
+    
+    
+    <meta name="description" content="支持向量机(support vector machine) 1、线性可分情况 将平行线插到的向量叫支持向量。 线性可分定义 一个训练集线性可分是指： ，使：对于 ,有： 若 ，则 若 ，则 （公式一） 优化问题 最小化（Minimize）： 限制条件（Su" />
+    
+
+    
+    
+    <meta name="keywords" content="ml, dl, nlp, theme, zozo" />
+    
+
+	
+    
+    <link rel="shortcut icon" href="https://reatiny.github.io/images/favicon.JPG" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://reatiny.github.io/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://reatiny.github.io/css/zozo.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://reatiny.github.io/css/highlight.css" />
+
+    
+    
+</head>
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/posts/">Archive</a>
+            </li>
+            
+            <li>
+                <a href="/tags/">Tags</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        <a id="menu_icon"><i class="ri-menu-line"></i></a>
+    </div>
+</div>
+        <div class="header animated fadeInDown">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="https://reatiny.github.io/">
+                    <span>Ray</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title">小睿仔</p>
+            <div class="my_socials">
+                
+                
+                <a href="https://github.com/reatiny" title="github" target="_blank"><i class="ri-github-fill"></i></a>
+                
+                
+                <a href="https://reatiny.github.io/index.xml" type="application/rss+xml" title="rss" target="_blank"><i
+                        class="ri-rss-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="content">
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/posts/support-vector-machine/'>support vector machine</a></h2>
+                        <span class="date">2021.05.23</span>
+                    </div>
+                    <div class="post_content markdown"><h1 id="支持向量机support-vector-machine">支持向量机(support vector machine)</h1>
+<h2 id="1线性可分情况">1、线性可分情况</h2>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620701133050-fc2b51cd-3090-4a7f-aa96-181f01ff2635.png#align=left&amp;display=inline&amp;height=147&amp;id=hCsma&amp;margin=%5Bobject%20Object%5D&amp;originHeight=588&amp;originWidth=839&amp;size=0&amp;status=done&amp;style=none&amp;width=210">
+<img src="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620701133050-fc2b51cd-3090-4a7f-aa96-181f01ff2635.png#align=left&amp;display=inline&amp;height=147&amp;id=hCsma&amp;margin=%5Bobject%20Object%5D&amp;originHeight=588&amp;originWidth=839&amp;size=0&amp;status=done&amp;style=none&amp;width=210" alt=""  />
+</a>
+</div>
+
+
+将平行线插到的向量叫支持向量。</p>
+<ul>
+<li>线性可分定义</li>
+</ul>
+<p>一个训练集线性可分是指：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/38c58caaec6f5df15a148318fceeadeb.svg#card=math&amp;code=%5Cleft%20%5C%7B%20%28X_%7Bi%7D%2Cy_%7Bi%7D%29%20%5Cright%20%5C%7D_%7Bi%3D1-N%7D&amp;height=21&amp;id=ezx66">
+<img src="https://cdn.nlark.com/yuque/__latex/38c58caaec6f5df15a148318fceeadeb.svg#card=math&amp;code=%5Cleft%20%5C%7B%20%28X_%7Bi%7D%2Cy_%7Bi%7D%29%20%5Cright%20%5C%7D_%7Bi%3D1-N%7D&amp;height=21&amp;id=ezx66" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/2268a7ecf28964e9c9b3c9cf11db7984.svg#card=math&amp;code=%5Cexists%20%28W%2Cb%29&amp;height=20&amp;id=NRqOF">
+<img src="https://cdn.nlark.com/yuque/__latex/2268a7ecf28964e9c9b3c9cf11db7984.svg#card=math&amp;code=%5Cexists%20%28W%2Cb%29&amp;height=20&amp;id=NRqOF" alt=""  />
+</a>
+</div>
+
+，使：对于
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c0bd77fd8973685fe7689e85e266dea0.svg#card=math&amp;code=%20%5Cforall%20%20i%3D1-N&amp;height=16&amp;id=SIpJF">
+<img src="https://cdn.nlark.com/yuque/__latex/c0bd77fd8973685fe7689e85e266dea0.svg#card=math&amp;code=%20%5Cforall%20%20i%3D1-N&amp;height=16&amp;id=SIpJF" alt=""  />
+</a>
+</div>
+
+,有：
+   若
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/6e5136cbf3a29276d9d198d0ecf2036b.svg#card=math&amp;code=y_%7Bi%7D%3D%2B1&amp;height=18&amp;id=j6hqS">
+<img src="https://cdn.nlark.com/yuque/__latex/6e5136cbf3a29276d9d198d0ecf2036b.svg#card=math&amp;code=y_%7Bi%7D%3D%2B1&amp;height=18&amp;id=j6hqS" alt=""  />
+</a>
+</div>
+
+，则
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/d125389931d90cb40547f4d8fb4abffc.svg#card=math&amp;code=W%5E%7BT%7DX_%7Bi%7D%2Bb%3E%3D0&amp;height=21&amp;id=XIh0J">
+<img src="https://cdn.nlark.com/yuque/__latex/d125389931d90cb40547f4d8fb4abffc.svg#card=math&amp;code=W%5E%7BT%7DX_%7Bi%7D%2Bb%3E%3D0&amp;height=21&amp;id=XIh0J" alt=""  />
+</a>
+</div>
+
+
+若
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a800617b69e110567d68cc895b06bfeb.svg#card=math&amp;code=y_%7Bi%7D%3D-1&amp;height=18&amp;id=ya4eN">
+<img src="https://cdn.nlark.com/yuque/__latex/a800617b69e110567d68cc895b06bfeb.svg#card=math&amp;code=y_%7Bi%7D%3D-1&amp;height=18&amp;id=ya4eN" alt=""  />
+</a>
+</div>
+
+，则
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/1d6dd74303b510a125a01035be63b2b4.svg#card=math&amp;code=W%5E%7BT%7DX_%7Bi%7D%2Bb%3C0&amp;height=21&amp;id=fQsff">
+<img src="https://cdn.nlark.com/yuque/__latex/1d6dd74303b510a125a01035be63b2b4.svg#card=math&amp;code=W%5E%7BT%7DX_%7Bi%7D%2Bb%3C0&amp;height=21&amp;id=fQsff" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/6126cc7ce9979b8677ecbb47abebe122.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%3E%3D0&amp;height=23&amp;id=N4lHR">
+<img src="https://cdn.nlark.com/yuque/__latex/6126cc7ce9979b8677ecbb47abebe122.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%3E%3D0&amp;height=23&amp;id=N4lHR" alt=""  />
+</a>
+</div>
+
+ （公式一）</p>
+<ul>
+<li>优化问题</li>
+</ul>
+<p>最小化（Minimize）：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/af78186d8aef86a1a0107af8f17993dd.svg#card=math&amp;code=%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D&amp;height=24&amp;id=t7gJE">
+<img src="https://cdn.nlark.com/yuque/__latex/af78186d8aef86a1a0107af8f17993dd.svg#card=math&amp;code=%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D&amp;height=24&amp;id=t7gJE" alt=""  />
+</a>
+</div>
+
+
+限制条件（Subject to）：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/ebc54618381285d2d7eac7fa821efea4.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%5Cgeq1%5C%3A%20%28i%3D1-N%29&amp;height=23&amp;id=QXNm4">
+<img src="https://cdn.nlark.com/yuque/__latex/ebc54618381285d2d7eac7fa821efea4.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%5Cgeq1%5C%3A%20%28i%3D1-N%29&amp;height=23&amp;id=QXNm4" alt=""  />
+</a>
+</div>
+
+
+只有在线性可分条件下，才有(W, b)满足所有限制条件：与公式一相辅相成</p>
+<p>事实1：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/1be4e66e8fe2110b04dea8484bc84844.svg#card=math&amp;code=W%5E%7BT%7DX%2Bb%3D0&amp;height=20&amp;id=BWWX9">
+<img src="https://cdn.nlark.com/yuque/__latex/1be4e66e8fe2110b04dea8484bc84844.svg#card=math&amp;code=W%5E%7BT%7DX%2Bb%3D0&amp;height=20&amp;id=BWWX9" alt=""  />
+</a>
+</div>
+
+ 与
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c779f1d666f65c92d0e425bb367ff5b9.svg#card=math&amp;code=aW%5E%7BT%7DX%2Bab%3D0&amp;height=20&amp;id=wniqg">
+<img src="https://cdn.nlark.com/yuque/__latex/c779f1d666f65c92d0e425bb367ff5b9.svg#card=math&amp;code=aW%5E%7BT%7DX%2Bab%3D0&amp;height=20&amp;id=wniqg" alt=""  />
+</a>
+</div>
+
+ 是同一个平面，其中
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a0a2e2099fc0abacbab9293e6ec0bc24.svg#card=math&amp;code=a%5Cepsilon%20R%5E%7B%2B%7D&amp;height=18&amp;id=B7UEl">
+<img src="https://cdn.nlark.com/yuque/__latex/a0a2e2099fc0abacbab9293e6ec0bc24.svg#card=math&amp;code=a%5Cepsilon%20R%5E%7B%2B%7D&amp;height=18&amp;id=B7UEl" alt=""  />
+</a>
+</div>
+
+。
+若（W, b）满足公式一，则（aW, ab）也满足公式一。
+事实2：点到平面距离公式
+向量 X0 <strong>到超平面</strong> <strong>WTX+b=0</strong> **的距离：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/edf5ec1157a2c843dd53971fb9653e9d.svg#card=math&amp;code=d%3D%5Cfrac%7B%5Cleft%20%7C%20W%5E%7BT%7DX_%7B0%7D%2Bb%20%5Cright%20%7C%7D%7B%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%7D&amp;height=49&amp;id=U6x8d">
+<img src="https://cdn.nlark.com/yuque/__latex/edf5ec1157a2c843dd53971fb9653e9d.svg#card=math&amp;code=d%3D%5Cfrac%7B%5Cleft%20%7C%20W%5E%7BT%7DX_%7B0%7D%2Bb%20%5Cright%20%7C%7D%7B%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%7D&amp;height=49&amp;id=U6x8d" alt=""  />
+</a>
+</div>
+
+
+最难理解的是：
+我们可以用 a 去缩放，
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/27d7749c445dd92cda22338aeaec0b3a.svg#card=math&amp;code=%28W%2Cb%29%5Crightarrow%20%28aW%2Cab%29&amp;height=20&amp;id=c8jgG">
+<img src="https://cdn.nlark.com/yuque/__latex/27d7749c445dd92cda22338aeaec0b3a.svg#card=math&amp;code=%28W%2Cb%29%5Crightarrow%20%28aW%2Cab%29&amp;height=20&amp;id=c8jgG" alt=""  />
+</a>
+</div>
+
+
+最终使在所有的支持向量 X0 上有：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/8659dca383071eea041497df52fe9be1.svg#card=math&amp;code=%5Cleft%20%7C%20W%5E%7B%5E%7BT%7D%7DX_%7B0%7D%2Bb%20%5Cright%20%7C%3D1&amp;height=30&amp;id=Ct8o7">
+<img src="https://cdn.nlark.com/yuque/__latex/8659dca383071eea041497df52fe9be1.svg#card=math&amp;code=%5Cleft%20%7C%20W%5E%7B%5E%7BT%7D%7DX_%7B0%7D%2Bb%20%5Cright%20%7C%3D1&amp;height=30&amp;id=Ct8o7" alt=""  />
+</a>
+</div>
+
+
+此时，支持向量与平面的距离 
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/15e220267b576515d7c1e29c6c082ec8.svg#card=math&amp;code=d%3D%5Cfrac%7B1%7D%7B%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%7D&amp;height=43&amp;id=NNTfD">
+<img src="https://cdn.nlark.com/yuque/__latex/15e220267b576515d7c1e29c6c082ec8.svg#card=math&amp;code=d%3D%5Cfrac%7B1%7D%7B%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%7D&amp;height=43&amp;id=NNTfD" alt=""  />
+</a>
+</div>
+
+，其他向量的距离将会大于 **d</p>
+<ul>
+<li>凸优化问题，二次规划问题</li>
+</ul>
+<p>目标函数：二次项
+限制条件：一次项
+这样的规划问题，要么无解，要么只有一个极值。</p>
+<h2 id="2线性不可分情况">2、线性不可分情况</h2>
+<ul>
+<li>优化问题</li>
+</ul>
+<p>最小化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/55bb696af2c51bf12f560361b7c5dc00.svg#card=math&amp;code=%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D%2BC%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=rWKOI">
+<img src="https://cdn.nlark.com/yuque/__latex/55bb696af2c51bf12f560361b7c5dc00.svg#card=math&amp;code=%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D%2BC%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=rWKOI" alt=""  />
+</a>
+</div>
+
+     
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a648d28f55856932dd1938aab3a9b7c4.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D&amp;height=18&amp;id=ROoe1">
+<img src="https://cdn.nlark.com/yuque/__latex/a648d28f55856932dd1938aab3a9b7c4.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D&amp;height=18&amp;id=ROoe1" alt=""  />
+</a>
+</div>
+
+：松弛变量（Slack Variable） 
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/d7174742a234a29e20bec74c4c45cf0f.svg#card=math&amp;code=C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=lqHxJ">
+<img src="https://cdn.nlark.com/yuque/__latex/d7174742a234a29e20bec74c4c45cf0f.svg#card=math&amp;code=C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=lqHxJ" alt=""  />
+</a>
+</div>
+
+这一项是正则项（Regulation term），使得目标函数规划化，让没有解的问题变得有解（如线性模型在非线性情况下就没有解，这时候加上合适的正则项后有解可取），或者求得的解不是我们所需要的解的时候则我们需要进行正则项的添加
+限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c467b10e3acdf4610833bb3ba8cd7cb0.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%5Cgeq1-%5Cxi%20_%7Bi%7D%20%5C%3A%20%28i%3D1-N%29&amp;height=23&amp;id=mfuzX">
+<img src="https://cdn.nlark.com/yuque/__latex/c467b10e3acdf4610833bb3ba8cd7cb0.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%5Cgeq1-%5Cxi%20_%7Bi%7D%20%5C%3A%20%28i%3D1-N%29&amp;height=23&amp;id=mfuzX" alt=""  />
+</a>
+</div>
+
+     
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/efe1b4cfe3103869cc0067bcfabf1bbb.svg#card=math&amp;code=1-%5Cxi%20_%7Bi%7D&amp;height=18&amp;id=fFken">
+<img src="https://cdn.nlark.com/yuque/__latex/efe1b4cfe3103869cc0067bcfabf1bbb.svg#card=math&amp;code=1-%5Cxi%20_%7Bi%7D&amp;height=18&amp;id=fFken" alt=""  />
+</a>
+</div>
+
+为了线性不可分条件下也能满足。
+   
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/39699e92669eae9ef8eadb5ceec42b37.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D%5Cgeq%200&amp;height=18&amp;id=KFJTr">
+<img src="https://cdn.nlark.com/yuque/__latex/39699e92669eae9ef8eadb5ceec42b37.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D%5Cgeq%200&amp;height=18&amp;id=KFJTr" alt=""  />
+</a>
+</div>
+
+</p>
+<p>分清楚哪些参数已知： yi，Xi，哪些参数未知：W，b, 
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a648d28f55856932dd1938aab3a9b7c4.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D&amp;height=18&amp;id=wMk0y">
+<img src="https://cdn.nlark.com/yuque/__latex/a648d28f55856932dd1938aab3a9b7c4.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D&amp;height=18&amp;id=wMk0y" alt=""  />
+</a>
+</div>
+
+。
+**C **是一个事先设定的参数，作用是用来对目标函数w和松弛变量间进行权衡的作用。</p>
+<h2 id="3非线性状况">3、非线性状况</h2>
+<p> 
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620701244960-04fc1126-8634-4fe0-af36-99b282f18cea.png#align=left&amp;display=inline&amp;height=206&amp;id=qkRVs&amp;margin=%5Bobject%20Object%5D&amp;originHeight=275&amp;originWidth=411&amp;size=0&amp;status=done&amp;style=none&amp;width=308">
+<img src="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620701244960-04fc1126-8634-4fe0-af36-99b282f18cea.png#align=left&amp;display=inline&amp;height=206&amp;id=qkRVs&amp;margin=%5Bobject%20Object%5D&amp;originHeight=275&amp;originWidth=411&amp;size=0&amp;status=done&amp;style=none&amp;width=308" alt=""  />
+</a>
+</div>
+
+</p>
+<ul>
+<li>高维映射的思想</li>
+</ul>
+<p>限定的方法是寻找一条直线，但我们希望的是找到一条曲线，两者产生了一定的矛盾，我们必须去开拓方法的可能性。
+Vapnic的一个创意在于：其他模型如神经网络、决策数模型想法在于寻找不是直线的其他的线，然后再进行优化。Vapnic的想法是，我们仍然找直线，但是我们是去一个更高维的层次去找直线。
+支持向量机处理非线性是将向量X映射至高维，再用线性方式去分开。
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/6810edc07569d3badf916b15c70cdd5f.svg#card=math&amp;code=X%5Crightarrow%20%5Cvarphi%20%28X%29%0A&amp;height=20&amp;id=FXNXp">
+<img src="https://cdn.nlark.com/yuque/__latex/6810edc07569d3badf916b15c70cdd5f.svg#card=math&amp;code=X%5Crightarrow%20%5Cvarphi%20%28X%29%0A&amp;height=20&amp;id=FXNXp" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620702323997-80ea6a85-0022-4cb9-9139-66535da6a817.png#align=left&amp;display=inline&amp;height=211&amp;id=wlesp&amp;margin=%5Bobject%20Object%5D&amp;originHeight=281&amp;originWidth=738&amp;size=0&amp;status=done&amp;style=none&amp;width=554">
+<img src="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620702323997-80ea6a85-0022-4cb9-9139-66535da6a817.png#align=left&amp;display=inline&amp;height=211&amp;id=wlesp&amp;margin=%5Bobject%20Object%5D&amp;originHeight=281&amp;originWidth=738&amp;size=0&amp;status=done&amp;style=none&amp;width=554" alt=""  />
+</a>
+</div>
+
+</p>
+<ul>
+<li>一个异或问题例子</li>
+</ul>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620703444721-93b2b84d-9775-44cb-9fb5-d3dfbb454be1.png#align=left&amp;display=inline&amp;height=176&amp;id=jNVOs&amp;margin=%5Bobject%20Object%5D&amp;originHeight=234&amp;originWidth=294&amp;size=0&amp;status=done&amp;style=none&amp;width=221">
+<img src="https://cdn.nlark.com/yuque/0/2021/png/13016262/1620703444721-93b2b84d-9775-44cb-9fb5-d3dfbb454be1.png#align=left&amp;display=inline&amp;height=176&amp;id=jNVOs&amp;margin=%5Bobject%20Object%5D&amp;originHeight=234&amp;originWidth=294&amp;size=0&amp;status=done&amp;style=none&amp;width=221" alt=""  />
+</a>
+</div>
+
+
+低维下分类：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/5245c0ee6a1cccad79935d438dea6ab4.svg#card=math&amp;code=X_%7B1%7D%3D%5Cbegin%7Bbmatrix%7D%0A0%5C%5C%20%0A%0A0%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B1%7D%2C%5C%3A%20X_%7B2%7D%3D%5Cbegin%7Bbmatrix%7D%0A1%5C%5C%20%0A%0A1%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B1%7D%2C%5C%3A%20X_%7B3%7D%3D%5Cbegin%7Bbmatrix%7D%0A1%5C%5C%20%0A%0A0%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B2%7D%2C%5C%3A%20X_%7B4%7D%3D%5Cbegin%7Bbmatrix%7D%0A0%5C%5C%20%0A%0A1%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B2%7D&amp;height=45&amp;id=SdD4f">
+<img src="https://cdn.nlark.com/yuque/__latex/5245c0ee6a1cccad79935d438dea6ab4.svg#card=math&amp;code=X_%7B1%7D%3D%5Cbegin%7Bbmatrix%7D%0A0%5C%5C%20%0A%0A0%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B1%7D%2C%5C%3A%20X_%7B2%7D%3D%5Cbegin%7Bbmatrix%7D%0A1%5C%5C%20%0A%0A1%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B1%7D%2C%5C%3A%20X_%7B3%7D%3D%5Cbegin%7Bbmatrix%7D%0A1%5C%5C%20%0A%0A0%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B2%7D%2C%5C%3A%20X_%7B4%7D%3D%5Cbegin%7Bbmatrix%7D%0A0%5C%5C%20%0A%0A1%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B2%7D&amp;height=45&amp;id=SdD4f" alt=""  />
+</a>
+</div>
+
+。    映射：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/ce6b0ea37d98171647d627428c0032a2.svg#card=math&amp;code=%5Cvarphi%20%28X%29%3A%5C%3A%20X%3D%5Cbegin%7Bbmatrix%7D%0Aa%5C%5C%20%0A%0Ab%5Cend%7Bbmatrix%7D%5Coverset%7B%5Cvarphi%20%7D%7B%5Crightarrow%7D%5C%3A%20%5Cvarphi%20%28X%29%3D%5Cbegin%7Bbmatrix%7D%0Aa%5E%7B2%7D%5C%5C%20%0Ab%5E%7B2%7D%5C%5C%20%0Aa%5C%5C%20%0Ab%5C%5C%20%0A%0Aab%5Cend%7Bbmatrix%7D&amp;height=115&amp;id=L6s9C">
+<img src="https://cdn.nlark.com/yuque/__latex/ce6b0ea37d98171647d627428c0032a2.svg#card=math&amp;code=%5Cvarphi%20%28X%29%3A%5C%3A%20X%3D%5Cbegin%7Bbmatrix%7D%0Aa%5C%5C%20%0A%0Ab%5Cend%7Bbmatrix%7D%5Coverset%7B%5Cvarphi%20%7D%7B%5Crightarrow%7D%5C%3A%20%5Cvarphi%20%28X%29%3D%5Cbegin%7Bbmatrix%7D%0Aa%5E%7B2%7D%5C%5C%20%0Ab%5E%7B2%7D%5C%5C%20%0Aa%5C%5C%20%0Ab%5C%5C%20%0A%0Aab%5Cend%7Bbmatrix%7D&amp;height=115&amp;id=L6s9C" alt=""  />
+</a>
+</div>
+
+</p>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/bbbbf73e681691befcdfaf283be97c92.svg#card=math&amp;code=%5Cvarphi%20%28X_%7B1%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A0%5C%5C%20%0A0%5C%5C%20%0A0%5C%5C%20%0A0%5C%5C%0A%0A%0A0%5Cend%7Bbmatrix%7D%2C%5C%3A%20%5Cvarphi%20%28X_%7B2%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A1%5C%5C%20%0A1%5C%5C%20%0A1%5C%5C%20%0A1%5C%5C%0A%0A%0A1%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B1%7D&amp;height=115&amp;id=xsypa">
+<img src="https://cdn.nlark.com/yuque/__latex/bbbbf73e681691befcdfaf283be97c92.svg#card=math&amp;code=%5Cvarphi%20%28X_%7B1%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A0%5C%5C%20%0A0%5C%5C%20%0A0%5C%5C%20%0A0%5C%5C%0A%0A%0A0%5Cend%7Bbmatrix%7D%2C%5C%3A%20%5Cvarphi%20%28X_%7B2%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A1%5C%5C%20%0A1%5C%5C%20%0A1%5C%5C%20%0A1%5C%5C%0A%0A%0A1%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B1%7D&amp;height=115&amp;id=xsypa" alt=""  />
+</a>
+</div>
+
+，
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/b1648a11004b0774c82dd88e496f8efc.svg#card=math&amp;code=%5Cvarphi%20%28X_%7B3%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A1%5C%5C%20%0A0%5C%5C%20%0A1%5C%5C%20%0A0%5C%5C%0A%0A%0A0%5Cend%7Bbmatrix%7D%2C%5C%3A%20%5Cvarphi%20%28X_%7B4%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A0%5C%5C%20%0A1%5C%5C%20%0A0%5C%5C%20%0A1%5C%5C%0A%0A%0A0%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B2%7D&amp;height=115&amp;id=XkSLJ">
+<img src="https://cdn.nlark.com/yuque/__latex/b1648a11004b0774c82dd88e496f8efc.svg#card=math&amp;code=%5Cvarphi%20%28X_%7B3%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A1%5C%5C%20%0A0%5C%5C%20%0A1%5C%5C%20%0A0%5C%5C%0A%0A%0A0%5Cend%7Bbmatrix%7D%2C%5C%3A%20%5Cvarphi%20%28X_%7B4%7D%29%3D%5Cbegin%7Bbmatrix%7D%0A%0A0%5C%5C%20%0A1%5C%5C%20%0A0%5C%5C%20%0A1%5C%5C%0A%0A%0A0%5Cend%7Bbmatrix%7D%5Cepsilon%20%5C%3A%20C_%7B2%7D&amp;height=115&amp;id=XkSLJ" alt=""  />
+</a>
+</div>
+
+。    其中一个解：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/37f7d4e4fdd93be0ff8a9bcc5359c3a5.svg#card=math&amp;code=W%3D%5Cbegin%7Bbmatrix%7D%0A-1%5C%5C%20%0A-1%5C%5C%20%0A-1%5C%5C%20%0A-1%5C%5C%20%0A%0A6%5Cend%7Bbmatrix%7D%2C%5C%3A%20b%3D1&amp;height=115&amp;id=us0Nk">
+<img src="https://cdn.nlark.com/yuque/__latex/37f7d4e4fdd93be0ff8a9bcc5359c3a5.svg#card=math&amp;code=W%3D%5Cbegin%7Bbmatrix%7D%0A-1%5C%5C%20%0A-1%5C%5C%20%0A-1%5C%5C%20%0A-1%5C%5C%20%0A%0A6%5Cend%7Bbmatrix%7D%2C%5C%3A%20b%3D1&amp;height=115&amp;id=us0Nk" alt=""  />
+</a>
+</div>
+
+。</p>
+<p>验证结果： 
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/687d9a324d531e8512d243bf5aa6103e.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B1%7D%29%2Bb%3D1%3E%200&amp;height=23&amp;id=IqR3B">
+<img src="https://cdn.nlark.com/yuque/__latex/687d9a324d531e8512d243bf5aa6103e.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B1%7D%29%2Bb%3D1%3E%200&amp;height=23&amp;id=IqR3B" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/acdd0fbe3c05ec0af6d8c6af6136e2cb.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B2%7D%29%2Bb%3D3%3E%200&amp;height=23&amp;id=AA5kq">
+<img src="https://cdn.nlark.com/yuque/__latex/acdd0fbe3c05ec0af6d8c6af6136e2cb.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B2%7D%29%2Bb%3D3%3E%200&amp;height=23&amp;id=AA5kq" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/b6ece4ed53ffb0a4c1b0b482c27ff308.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B3%7D%29%2Bb%3D-1%3C0&amp;height=22&amp;id=zBgO2">
+<img src="https://cdn.nlark.com/yuque/__latex/b6ece4ed53ffb0a4c1b0b482c27ff308.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B3%7D%29%2Bb%3D-1%3C0&amp;height=22&amp;id=zBgO2" alt=""  />
+</a>
+</div>
+
+        <br>
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/bebe0f117f71c6e1bd1842fc7622ce5f.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B4%7D%29%2Bb%3D-1%3C0&amp;height=23&amp;id=W0xhT">
+<img src="https://cdn.nlark.com/yuque/__latex/bebe0f117f71c6e1bd1842fc7622ce5f.svg#card=math&amp;code=W%5E%7BT%7D%5Cvarphi%20%28X_%7B4%7D%29%2Bb%3D-1%3C0&amp;height=23&amp;id=W0xhT" alt=""  />
+</a>
+</div>
+
+</p>
+<p>映射到高维后，限制条件变为：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/1caba33e9f1d8dd05678dc7df1c7feff.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7D%5Cvarphi%20%28X_%7B%7D%29_%7Bi%7D%2Bb%5D%5Cgeq1%5C%3A%20%28i%3D1-N%29%0A&amp;height=23&amp;id=AfImR">
+<img src="https://cdn.nlark.com/yuque/__latex/1caba33e9f1d8dd05678dc7df1c7feff.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7D%5Cvarphi%20%28X_%7B%7D%29_%7Bi%7D%2Bb%5D%5Cgeq1%5C%3A%20%28i%3D1-N%29%0A&amp;height=23&amp;id=AfImR" alt=""  />
+</a>
+</div>
+
+，W的维度也发生了改变。以后我们可以知道
+维度越高，线性可分的概率越大
+维数为无限时，线性可分的概率为1</p>
+<ul>
+<li>如何定义映射</li>
+</ul>
+<p><strong>SVN最有创造力的一个方面</strong>：</p>
+<ol>
+<li>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/9e032e57420d190bfbf12d094f8f183a.svg#card=math&amp;code=%5Cvarphi%20%EF%BC%88X%EF%BC%89%0A&amp;height=24&amp;id=ABD7E">
+<img src="https://cdn.nlark.com/yuque/__latex/9e032e57420d190bfbf12d094f8f183a.svg#card=math&amp;code=%5Cvarphi%20%EF%BC%88X%EF%BC%89%0A&amp;height=24&amp;id=ABD7E" alt=""  />
+</a>
+</div>
+
+是无限维，但是所用的手段是有限维。</li>
+</ol>
+<p>我们可以不知道无限维映射
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/9e032e57420d190bfbf12d094f8f183a.svg#card=math&amp;code=%5Cvarphi%20%EF%BC%88X%EF%BC%89%0A&amp;height=24&amp;id=pAxkF">
+<img src="https://cdn.nlark.com/yuque/__latex/9e032e57420d190bfbf12d094f8f183a.svg#card=math&amp;code=%5Cvarphi%20%EF%BC%88X%EF%BC%89%0A&amp;height=24&amp;id=pAxkF" alt=""  />
+</a>
+</div>
+
+的显式表达，我们只要知道一个核函数(Kernel Function）
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/5e6781adaa688b8937cbf252d4e5a6c0.svg#card=math&amp;code=K%28X_%7B1%7D%2CX_%7B2%7D%29%3D%5Cvarphi%20%28X_%7B1%7D%29%5E%7BT%7D%5Cvarphi%20%28X_%7B2%7D%29&amp;height=23&amp;id=C8Jl8">
+<img src="https://cdn.nlark.com/yuque/__latex/5e6781adaa688b8937cbf252d4e5a6c0.svg#card=math&amp;code=K%28X_%7B1%7D%2CX_%7B2%7D%29%3D%5Cvarphi%20%28X_%7B1%7D%29%5E%7BT%7D%5Cvarphi%20%28X_%7B2%7D%29&amp;height=23&amp;id=C8Jl8" alt=""  />
+</a>
+</div>
+
+      （两边都是一个数，右边是两个无限维向量的内积）
+则线性不可分条件下的优化式仍然可解。
+常见核函数：</p>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="images/image-20220117152344194.png">
+<img src="images/image-20220117152344194.png" alt="image-20220117152344194"  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/14512dd5f615c9fe774c3180412051d8.svg#card=math&amp;code=K%28X_%7B1%7D%2CX_%7B2%7D%29&amp;height=20&amp;id=de8Y8">
+<img src="https://cdn.nlark.com/yuque/__latex/14512dd5f615c9fe774c3180412051d8.svg#card=math&amp;code=K%28X_%7B1%7D%2CX_%7B2%7D%29&amp;height=20&amp;id=de8Y8" alt=""  />
+</a>
+</div>
+
+能写成
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/9c2e3f765090c4aa2155ee51b906ef0a.svg#card=math&amp;code=%5Cvarphi%20%28X_%7B1%7D%29%5E%7BT%7D%5Cvarphi%20%28X_%7B2%7D%29&amp;height=23&amp;id=poxek">
+<img src="https://cdn.nlark.com/yuque/__latex/9c2e3f765090c4aa2155ee51b906ef0a.svg#card=math&amp;code=%5Cvarphi%20%28X_%7B1%7D%29%5E%7BT%7D%5Cvarphi%20%28X_%7B2%7D%29&amp;height=23&amp;id=poxek" alt=""  />
+</a>
+</div>
+
+的充要条件(Mercer&rsquo;s Theorem)</p>
+<ol>
+<li>交换性：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/25c6c0fa130b7b7646aabfea46cc544a.svg#card=math&amp;code=K%28X_%7B1%7D%2CX_%7B2%7D%29%3DK%28X_%7B2%7D%2CX_%7B1%7D%29&amp;height=20&amp;id=eJ2W4">
+<img src="https://cdn.nlark.com/yuque/__latex/25c6c0fa130b7b7646aabfea46cc544a.svg#card=math&amp;code=K%28X_%7B1%7D%2CX_%7B2%7D%29%3DK%28X_%7B2%7D%2CX_%7B1%7D%29&amp;height=20&amp;id=eJ2W4" alt=""  />
+</a>
+</div>
+
+             </li>
+<li>半正定性：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/f469f12304a7449484717cb3d2c3f4a8.svg#card=math&amp;code=%5Cforall%20C_%7Bi%7D%2CX_%7Bi%7D%5C%3A%20%28i%3D1-N%29%2C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bj%3D1%7D%5E%7BN%7DC_%7Bi%7DC_%7Bj%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29%5Cgeq%200&amp;height=54&amp;id=HpVw1">
+<img src="https://cdn.nlark.com/yuque/__latex/f469f12304a7449484717cb3d2c3f4a8.svg#card=math&amp;code=%5Cforall%20C_%7Bi%7D%2CX_%7Bi%7D%5C%3A%20%28i%3D1-N%29%2C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bj%3D1%7D%5E%7BN%7DC_%7Bi%7DC_%7Bj%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29%5Cgeq%200&amp;height=54&amp;id=HpVw1" alt=""  />
+</a>
+</div>
+
+    Ci为常数，Xi为向量</li>
+</ol>
+<hr>
+<p>补充知识：优化理论
+原问题（Prime Problem）：非常普适
+最小化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/189d11699ddc394ec0f363f225d92167.svg#card=math&amp;code=f%28%5Comega%20%29&amp;height=20&amp;id=gjHph">
+<img src="https://cdn.nlark.com/yuque/__latex/189d11699ddc394ec0f363f225d92167.svg#card=math&amp;code=f%28%5Comega%20%29&amp;height=20&amp;id=gjHph" alt=""  />
+</a>
+</div>
+
+           
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/260b57b4fdee8c5a001c09b555ccd28d.svg#card=math&amp;code=%5Comega&amp;height=12&amp;id=NXZmJ">
+<img src="https://cdn.nlark.com/yuque/__latex/260b57b4fdee8c5a001c09b555ccd28d.svg#card=math&amp;code=%5Comega&amp;height=12&amp;id=NXZmJ" alt=""  />
+</a>
+</div>
+
+为所有待求的变量
+限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/d3a720e811f05ddb2d62b1e0c1fd6282.svg#card=math&amp;code=g_%7Bi%7D%28%5Comega%20%29%5Cleqslant%200%5C%3A%20%5C%3A%20%28i%3D1%5Crightarrow%20K%29&amp;height=20&amp;id=AuATx">
+<img src="https://cdn.nlark.com/yuque/__latex/d3a720e811f05ddb2d62b1e0c1fd6282.svg#card=math&amp;code=g_%7Bi%7D%28%5Comega%20%29%5Cleqslant%200%5C%3A%20%5C%3A%20%28i%3D1%5Crightarrow%20K%29&amp;height=20&amp;id=AuATx" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/18e620443d037b3e97d87b049111c71a.svg#card=math&amp;code=h_%7Bi%7D%28%5Comega%20%29%3D%200%5C%3A%20%5C%3A%20%28i%3D1%5Crightarrow%20M%29&amp;height=20&amp;id=pj8iw">
+<img src="https://cdn.nlark.com/yuque/__latex/18e620443d037b3e97d87b049111c71a.svg#card=math&amp;code=h_%7Bi%7D%28%5Comega%20%29%3D%200%5C%3A%20%5C%3A%20%28i%3D1%5Crightarrow%20M%29&amp;height=20&amp;id=pj8iw" alt=""  />
+</a>
+</div>
+
+</p>
+<p>对偶问题（Dual Problem）
+定义：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/2f915658ca5da23080d9de61d06574f8.svg#card=math&amp;code=L%28%5Comega%20%2C%5Calpha%20%2C%5Cbeta%20%29%3Df%28%5Comega%20%29%2B%5Csum_%7Bi%3D1%7D%5E%7BK%7D%5Calpha%20_%7Bi%7Dg_%7Bi%7D%28%5Comega%20%29%2B%5Csum_%7Bi%3D1%7D%5E%7BM%7D%5Cbeta%20_%7Bi%7Dh_%7Bi%7D%28%5Comega%20%29%3Df%28%5Comega%20%29%2B%5Calpha%20%5E%7BT%7Dg%28%5Comega%20%29%2B%5Cbeta%20%5E%7BT%7Dh%28%5Comega%20%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;height=53&amp;id=nJ190">
+<img src="https://cdn.nlark.com/yuque/__latex/2f915658ca5da23080d9de61d06574f8.svg#card=math&amp;code=L%28%5Comega%20%2C%5Calpha%20%2C%5Cbeta%20%29%3Df%28%5Comega%20%29%2B%5Csum_%7Bi%3D1%7D%5E%7BK%7D%5Calpha%20_%7Bi%7Dg_%7Bi%7D%28%5Comega%20%29%2B%5Csum_%7Bi%3D1%7D%5E%7BM%7D%5Cbeta%20_%7Bi%7Dh_%7Bi%7D%28%5Comega%20%29%3Df%28%5Comega%20%29%2B%5Calpha%20%5E%7BT%7Dg%28%5Comega%20%29%2B%5Cbeta%20%5E%7BT%7Dh%28%5Comega%20%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;height=53&amp;id=nJ190" alt=""  />
+</a>
+</div>
+
+
+对偶问题定义
+最大化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/10b20c68c915503c2e05273f651f208e.svg#card=math&amp;code=%5CTheta%28%5Calpha%20%2C%5Cbeta%20%29%3Dinf%5Cleft%20%5C%7B%20L%28%5Comega%20%2C%5Calpha%20%2C%5Cbeta%20%29%20%5Cright%20%5C%7D&amp;height=20&amp;id=FbcuZ">
+<img src="https://cdn.nlark.com/yuque/__latex/10b20c68c915503c2e05273f651f208e.svg#card=math&amp;code=%5CTheta%28%5Calpha%20%2C%5Cbeta%20%29%3Dinf%5Cleft%20%5C%7B%20L%28%5Comega%20%2C%5Calpha%20%2C%5Cbeta%20%29%20%5Cright%20%5C%7D&amp;height=20&amp;id=FbcuZ" alt=""  />
+</a>
+</div>
+
+ 所有
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/260b57b4fdee8c5a001c09b555ccd28d.svg#card=math&amp;code=%5Comega%20&amp;height=12&amp;id=XM2vQ">
+<img src="https://cdn.nlark.com/yuque/__latex/260b57b4fdee8c5a001c09b555ccd28d.svg#card=math&amp;code=%5Comega%20&amp;height=12&amp;id=XM2vQ" alt=""  />
+</a>
+</div>
+
+              inf：求最小值
+限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/7cae83f8772867c336ebf2c4948c1ce2.svg#card=math&amp;code=%5Calpha_%7Bi%7D%5Cgeqslant%200%5C%3A%20%5C%3A%20%28i%3D1%5Crightarrow%20K%29&amp;height=20&amp;id=YsDLP">
+<img src="https://cdn.nlark.com/yuque/__latex/7cae83f8772867c336ebf2c4948c1ce2.svg#card=math&amp;code=%5Calpha_%7Bi%7D%5Cgeqslant%200%5C%3A%20%5C%3A%20%28i%3D1%5Crightarrow%20K%29&amp;height=20&amp;id=YsDLP" alt=""  />
+</a>
+</div>
+
+</p>
+<p>定理：如果
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/8797c70a5ae30709d4966114990e9308.svg#card=math&amp;code=%5Comega%20%5E%7B%2A%7D&amp;height=16&amp;id=pnnA3">
+<img src="https://cdn.nlark.com/yuque/__latex/8797c70a5ae30709d4966114990e9308.svg#card=math&amp;code=%5Comega%20%5E%7B%2A%7D&amp;height=16&amp;id=pnnA3" alt=""  />
+</a>
+</div>
+
+是原问题的解，而
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/4ec89c9132f83abdfa1124f825448ed3.svg#card=math&amp;code=%5Calpha%20%5E%7B%5E%7B%2A%7D%7D&amp;height=20&amp;id=xyAok">
+<img src="https://cdn.nlark.com/yuque/__latex/4ec89c9132f83abdfa1124f825448ed3.svg#card=math&amp;code=%5Calpha%20%5E%7B%5E%7B%2A%7D%7D&amp;height=20&amp;id=xyAok" alt=""  />
+</a>
+</div>
+
+，
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c57d6c1f9af2fceeb1207c3cadbfa415.svg#card=math&amp;code=%5Cbeta%20%5E%7B%5E%7B%2A%7D%7D&amp;height=23&amp;id=vDWGc">
+<img src="https://cdn.nlark.com/yuque/__latex/c57d6c1f9af2fceeb1207c3cadbfa415.svg#card=math&amp;code=%5Cbeta%20%5E%7B%5E%7B%2A%7D%7D&amp;height=23&amp;id=vDWGc" alt=""  />
+</a>
+</div>
+
+是对偶问题的解，则有：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/f9519876ed94e67aa8f2af9d76a982c3.svg#card=math&amp;code=f%28%5Comega%20%5E%7B%2A%7D%29%5Cgeqslant%20%5Ctheta%20%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29&amp;height=20&amp;id=OQkmF">
+<img src="https://cdn.nlark.com/yuque/__latex/f9519876ed94e67aa8f2af9d76a982c3.svg#card=math&amp;code=f%28%5Comega%20%5E%7B%2A%7D%29%5Cgeqslant%20%5Ctheta%20%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29&amp;height=20&amp;id=OQkmF" alt=""  />
+</a>
+</div>
+
+
+证明：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a1b0cfbfd0e40fb97ca3bd9f8f743f70.svg#card=math&amp;code=%5Ctheta%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%3Dinf%5Cleft%20%5C%7B%20L%28%5Comega%20%2C%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%20%5Cright%20%5C%7D%5Cleq%20L%28%5Comega%20%5E%7B%2A%7D%2C%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%3Df%28%5Comega%20%5E%7B%2A%7D%29%2B%5Csum_%7Bi%3D1%7D%5E%7BK%7D%5Calpha%20_%7Bi%7D%5E%7B%2A%7Dg_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%2B%5Csum_%7Bi%3D1%7D%5E%7BM%7D%5Cbeta%20_%7Bi%7D%5E%7B%2A%7Dh_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%20%5C%5C%5Cbecause%20%5Calpha%20_%7Bi%7D%5E%7B%2A%7D%5Cgeq%200%2Cg_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%5Cleqslant%200%2Ch_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%3D0%20%5C%5C%5Ctherefore%20%5Ctheta%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%5Cleq%20f%28%5Comega%20%5E%7B%2A%7D%29&amp;height=102&amp;id=c6FlK">
+<img src="https://cdn.nlark.com/yuque/__latex/a1b0cfbfd0e40fb97ca3bd9f8f743f70.svg#card=math&amp;code=%5Ctheta%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%3Dinf%5Cleft%20%5C%7B%20L%28%5Comega%20%2C%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%20%5Cright%20%5C%7D%5Cleq%20L%28%5Comega%20%5E%7B%2A%7D%2C%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%3Df%28%5Comega%20%5E%7B%2A%7D%29%2B%5Csum_%7Bi%3D1%7D%5E%7BK%7D%5Calpha%20_%7Bi%7D%5E%7B%2A%7Dg_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%2B%5Csum_%7Bi%3D1%7D%5E%7BM%7D%5Cbeta%20_%7Bi%7D%5E%7B%2A%7Dh_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%20%5C%5C%5Cbecause%20%5Calpha%20_%7Bi%7D%5E%7B%2A%7D%5Cgeq%200%2Cg_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%5Cleqslant%200%2Ch_%7Bi%7D%28%5Comega%20%5E%7B%2A%7D%29%3D0%20%5C%5C%5Ctherefore%20%5Ctheta%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%5Cleq%20f%28%5Comega%20%5E%7B%2A%7D%29&amp;height=102&amp;id=c6FlK" alt=""  />
+</a>
+</div>
+
+</p>
+<p>定义：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/fe5fb79a9244d77fb46094239e62891e.svg#card=math&amp;code=G%3Df%28%5Comega%20%5E%7B%2A%7D%29-%5Ctheta%20%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%5Cgeqslant%200&amp;height=20&amp;id=cXAOa">
+<img src="https://cdn.nlark.com/yuque/__latex/fe5fb79a9244d77fb46094239e62891e.svg#card=math&amp;code=G%3Df%28%5Comega%20%5E%7B%2A%7D%29-%5Ctheta%20%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29%5Cgeqslant%200&amp;height=20&amp;id=cXAOa" alt=""  />
+</a>
+</div>
+
+   G叫做原问题与对偶问题的间距（Duality Gap)
+对于某些特定的优化问题，可以证明 <strong>G=0</strong></p>
+<p>强对偶定理：
+若
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/189d11699ddc394ec0f363f225d92167.svg#card=math&amp;code=f%28%5Comega%20%29&amp;height=20&amp;id=Ho3S2">
+<img src="https://cdn.nlark.com/yuque/__latex/189d11699ddc394ec0f363f225d92167.svg#card=math&amp;code=f%28%5Comega%20%29&amp;height=20&amp;id=Ho3S2" alt=""  />
+</a>
+</div>
+
+为凸函数，且
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/80882c1af5fc39828dc33222c5823367.svg#card=math&amp;code=g%28%5Comega%20%29%3DA%5Comega%20%2Bb%2Ch%28%5Comega%29%3DC%5Comega%20%2Bd&amp;height=20&amp;id=Ys4CN">
+<img src="https://cdn.nlark.com/yuque/__latex/80882c1af5fc39828dc33222c5823367.svg#card=math&amp;code=g%28%5Comega%20%29%3DA%5Comega%20%2Bb%2Ch%28%5Comega%29%3DC%5Comega%20%2Bd&amp;height=20&amp;id=Ys4CN" alt=""  />
+</a>
+</div>
+
+（线性）则此优化问题的原问题与对偶问题的间距为0，即
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/3f6e6de150302104978e976066dc8cd1.svg#card=math&amp;code=f%28%5Comega%20%5E%7B%2A%7D%29%3D%20%5Ctheta%20%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29&amp;height=20&amp;id=jV5p0">
+<img src="https://cdn.nlark.com/yuque/__latex/3f6e6de150302104978e976066dc8cd1.svg#card=math&amp;code=f%28%5Comega%20%5E%7B%2A%7D%29%3D%20%5Ctheta%20%28%5Calpha%20%5E%7B%2A%7D%2C%5Cbeta%20%5E%7B%2A%7D%29&amp;height=20&amp;id=jV5p0" alt=""  />
+</a>
+</div>
+
+</p>
+<p>通过强对偶定理和上述定理可以得到：(KKT条件)
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c10c801a1a3c8c3e2569da87a61edbad.svg#card=math&amp;code=%5Cforall%20i%3D1%5Crightarrow%20K%20%5C%5C%0AOR%5C%3A%20%5C%3A%20%20%5Calpha%20_%7Bi%7D%5E%7B%2A%7D%3D0%20%5C%5C%0AOR%5C%3A%20%5C%3A%20g_%7Bi%7D%5E%7B%2A%7D%28%5Comega%20%5E%7B%2A%7D%29%3D0&amp;height=65&amp;id=JUiC3">
+<img src="https://cdn.nlark.com/yuque/__latex/c10c801a1a3c8c3e2569da87a61edbad.svg#card=math&amp;code=%5Cforall%20i%3D1%5Crightarrow%20K%20%5C%5C%0AOR%5C%3A%20%5C%3A%20%20%5Calpha%20_%7Bi%7D%5E%7B%2A%7D%3D0%20%5C%5C%0AOR%5C%3A%20%5C%3A%20g_%7Bi%7D%5E%7B%2A%7D%28%5Comega%20%5E%7B%2A%7D%29%3D0&amp;height=65&amp;id=JUiC3" alt=""  />
+</a>
+</div>
+
+</p>
+<hr>
+<ul>
+<li>将SVM原问题转化为对偶问题</li>
+</ul>
+<p>原问题：
+最小化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/55bb696af2c51bf12f560361b7c5dc00.svg#card=math&amp;code=%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D%2BC%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=KHKPe">
+<img src="https://cdn.nlark.com/yuque/__latex/55bb696af2c51bf12f560361b7c5dc00.svg#card=math&amp;code=%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D%2BC%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=KHKPe" alt=""  />
+</a>
+</div>
+
+（凸函数：函数上任选两点，两点间的函数图像在两点连线以下）
+限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c467b10e3acdf4610833bb3ba8cd7cb0.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%5Cgeq1-%5Cxi%20_%7Bi%7D%20%5C%3A%20%28i%3D1-N%29&amp;height=23&amp;id=yOMjU">
+<img src="https://cdn.nlark.com/yuque/__latex/c467b10e3acdf4610833bb3ba8cd7cb0.svg#card=math&amp;code=y_%7Bi%7D%5BW%5E%7BT%7DX_%7Bi%7D%2Bb%5D%5Cgeq1-%5Cxi%20_%7Bi%7D%20%5C%3A%20%28i%3D1-N%29&amp;height=23&amp;id=yOMjU" alt=""  />
+</a>
+</div>
+
+ <br>
+   
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/39699e92669eae9ef8eadb5ceec42b37.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D%5Cgeq%200&amp;height=18&amp;id=CaoCb">
+<img src="https://cdn.nlark.com/yuque/__latex/39699e92669eae9ef8eadb5ceec42b37.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D%5Cgeq%200&amp;height=18&amp;id=CaoCb" alt=""  />
+</a>
+</div>
+
+</p>
+<p>改造为：
+最小化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/97de5a24a01f889129805d70e703a14a.svg#card=math&amp;code=%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D-C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=xlGkQ">
+<img src="https://cdn.nlark.com/yuque/__latex/97de5a24a01f889129805d70e703a14a.svg#card=math&amp;code=%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D-C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D&amp;height=53&amp;id=xlGkQ" alt=""  />
+</a>
+</div>
+
+
+限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/66521a1ea535bde8d6e26591a6e6c414.svg#card=math&amp;code=1%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7DW%5E%7B%5E%7BT%7D%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%5Cleqslant%200%20%28i%3D1-N%29&amp;height=25&amp;id=LBxQC">
+<img src="https://cdn.nlark.com/yuque/__latex/66521a1ea535bde8d6e26591a6e6c414.svg#card=math&amp;code=1%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7DW%5E%7B%5E%7BT%7D%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%5Cleqslant%200%20%28i%3D1-N%29&amp;height=25&amp;id=LBxQC" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/7f965a43364ff84c4dd1870152484b25.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D%5Cleq%200&amp;height=18&amp;id=GHpdU">
+<img src="https://cdn.nlark.com/yuque/__latex/7f965a43364ff84c4dd1870152484b25.svg#card=math&amp;code=%5Cxi%20_%7Bi%7D%5Cleq%200&amp;height=18&amp;id=GHpdU" alt=""  />
+</a>
+</div>
+
+</p>
+<p>对偶问题：
+最大化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c54b240bb0d27c7d65aaad7ee1e0329b.svg#card=math&amp;code=%5Ctheta%20%28%5Calpha%20%2C%5Cbeta%20%29%3D%20inf%5Cleft%20%5C%7B%20%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D-C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cbeta%20_%7Bi%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D%5Cleft%20%5B%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7DW%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%20%5Cright%20%5D%20%5Cright%20%5C%7D%2C%5Cforall%20%28W%2C%5Cxi%20_%7Bi%7D%2Cb%29&amp;height=54&amp;id=fw3cU">
+<img src="https://cdn.nlark.com/yuque/__latex/c54b240bb0d27c7d65aaad7ee1e0329b.svg#card=math&amp;code=%5Ctheta%20%28%5Calpha%20%2C%5Cbeta%20%29%3D%20inf%5Cleft%20%5C%7B%20%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D-C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cbeta%20_%7Bi%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D%5Cleft%20%5B%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7DW%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%20%5Cright%20%5D%20%5Cright%20%5C%7D%2C%5Cforall%20%28W%2C%5Cxi%20_%7Bi%7D%2Cb%29&amp;height=54&amp;id=fw3cU" alt=""  />
+</a>
+</div>
+
+
+限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/d6c26bd0c149e9804ae91e9bdfec6298.svg#card=math&amp;code=%5Calpha%20_%7Bi%7D%5Cgeqslant%200%2C%5Cbeta%20_%7Bi%7D%5Cgeq%200%5C%3A%20%5C%3A%20%28i%3D1-N%29&amp;height=20&amp;id=f7HkD">
+<img src="https://cdn.nlark.com/yuque/__latex/d6c26bd0c149e9804ae91e9bdfec6298.svg#card=math&amp;code=%5Calpha%20_%7Bi%7D%5Cgeqslant%200%2C%5Cbeta%20_%7Bi%7D%5Cgeq%200%5C%3A%20%5C%3A%20%28i%3D1-N%29&amp;height=20&amp;id=f7HkD" alt=""  />
+</a>
+</div>
+
+
+注意：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/410784726e7e142093bd14ff06c10575.svg#card=math&amp;code=%5Calpha%20_%7Bi%7D%EF%BC%8C%5Cbeta%20_%7Bi%7D&amp;height=24&amp;id=ob1za">
+<img src="https://cdn.nlark.com/yuque/__latex/410784726e7e142093bd14ff06c10575.svg#card=math&amp;code=%5Calpha%20_%7Bi%7D%EF%BC%8C%5Cbeta%20_%7Bi%7D&amp;height=24&amp;id=ob1za" alt=""  />
+</a>
+</div>
+
+对应的是原对偶问题理论中的α，原对偶理论中的β在这个实例中是没有的。
+求解：令
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/1fcb509265adc097a71637af7c903feb.svg#card=math&amp;code=L%3D%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D-C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cbeta%20_%7Bi%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D%5Cleft%20%5B%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7DW%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%20%5Cright&amp;height=53&amp;id=VhQor">
+<img src="https://cdn.nlark.com/yuque/__latex/1fcb509265adc097a71637af7c903feb.svg#card=math&amp;code=L%3D%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20W%20%5Cright%20%5C%7C%5E%7B2%7D-C%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cbeta%20_%7Bi%7D%5Cxi%20_%7Bi%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D%5Cleft%20%5B%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7DW%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%20%5Cright&amp;height=53&amp;id=VhQor" alt=""  />
+</a>
+</div>
+
+
+对L函数求偏导可得：
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/ef53ccb1d80ba2dd91f69f8e91108725.svg#card=math&amp;code=%5Cfrac%7B%5Cpartial%20L%7D%7B%5Cpartial%20%5Comega%20%7D%3D0%5CRightarrow%20%5Comega%20%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%5Cvarphi%20%28X_%7Bi%7D%29&amp;height=53&amp;id=kkBWt">
+<img src="https://cdn.nlark.com/yuque/__latex/ef53ccb1d80ba2dd91f69f8e91108725.svg#card=math&amp;code=%5Cfrac%7B%5Cpartial%20L%7D%7B%5Cpartial%20%5Comega%20%7D%3D0%5CRightarrow%20%5Comega%20%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%5Cvarphi%20%28X_%7Bi%7D%29&amp;height=53&amp;id=kkBWt" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/6fab01f2c84968e39b8ef0dd0e357373.svg#card=math&amp;code=%5Cfrac%7B%5Cpartial%20L%7D%7B%5Cpartial%20%5Cxi%20_%7Bi%7D%20%7D%3D0%5CRightarrow%20%5Cbeta%20_%7Bi%7D%2B%5Calpha%20_%7Bi%7D%3DC&amp;height=43&amp;id=c8fKJ">
+<img src="https://cdn.nlark.com/yuque/__latex/6fab01f2c84968e39b8ef0dd0e357373.svg#card=math&amp;code=%5Cfrac%7B%5Cpartial%20L%7D%7B%5Cpartial%20%5Cxi%20_%7Bi%7D%20%7D%3D0%5CRightarrow%20%5Cbeta%20_%7Bi%7D%2B%5Calpha%20_%7Bi%7D%3DC&amp;height=43&amp;id=c8fKJ" alt=""  />
+</a>
+</div>
+
+
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/fb22c24e45a857c2ef740c483e5aa42d.svg#card=math&amp;code=%5Cfrac%7B%5Cpartial%20L%7D%7B%5Cpartial%20b%7D%20%3D0%5CRightarrow%20%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%3D0&amp;height=53&amp;id=ANMeW">
+<img src="https://cdn.nlark.com/yuque/__latex/fb22c24e45a857c2ef740c483e5aa42d.svg#card=math&amp;code=%5Cfrac%7B%5Cpartial%20L%7D%7B%5Cpartial%20b%7D%20%3D0%5CRightarrow%20%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%3D0&amp;height=53&amp;id=ANMeW" alt=""  />
+</a>
+</div>
+
+
+代入L函数消去
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/fb70fd53cb4849ac8ac30d9e62f0ed88.svg#card=math&amp;code=%5Cvarphi%20%28X_%7Bi%7D%29&amp;height=20&amp;id=ShzRc">
+<img src="https://cdn.nlark.com/yuque/__latex/fb70fd53cb4849ac8ac30d9e62f0ed88.svg#card=math&amp;code=%5Cvarphi%20%28X_%7Bi%7D%29&amp;height=20&amp;id=ShzRc" alt=""  />
+</a>
+</div>
+
+得到
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/c0b48f7ad43cc596e67f5ed9179b856d.svg#card=math&amp;code=%5CTheta%3D%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20%5Comega%20%20%5Cright%20%5C%7C%5E%7B2%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D-%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29%20%5C%5C%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D-%5Cfrac%7B1%7D%7B2%7D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bj%3D1%7D%5E%7BN%7D%5Calpha_%7Bi%7D%5Calpha%20_%7Bj%7Dy_%7Bi%7Dy_%7Bj%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29&amp;height=112&amp;id=QVSoc">
+<img src="https://cdn.nlark.com/yuque/__latex/c0b48f7ad43cc596e67f5ed9179b856d.svg#card=math&amp;code=%5CTheta%3D%5Cfrac%7B1%7D%7B2%7D%5Cleft%20%5C%7C%20%5Comega%20%20%5Cright%20%5C%7C%5E%7B2%7D%2B%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D-%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29%20%5C%5C%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D-%5Cfrac%7B1%7D%7B2%7D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bj%3D1%7D%5E%7BN%7D%5Calpha_%7Bi%7D%5Calpha%20_%7Bj%7Dy_%7Bi%7Dy_%7Bj%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29&amp;height=112&amp;id=QVSoc" alt=""  />
+</a>
+</div>
+
+</p>
+<p>我们可以得到对偶问题的简化形式：
+最大化：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a20e83ecbdbead69130f30bc8775ce20.svg#card=math&amp;code=%5CTheta%20%28%5Calpha%20%29%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D-%5Cfrac%7B1%7D%7B2%7D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bj%3D1%7D%5E%7BN%7D%5Calpha_%7Bi%7D%5Calpha%20_%7Bj%7Dy_%7Bi%7Dy_%7Bj%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29&amp;height=55&amp;id=WsGLu">
+<img src="https://cdn.nlark.com/yuque/__latex/a20e83ecbdbead69130f30bc8775ce20.svg#card=math&amp;code=%5CTheta%20%28%5Calpha%20%29%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7D-%5Cfrac%7B1%7D%7B2%7D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Csum_%7Bj%3D1%7D%5E%7BN%7D%5Calpha_%7Bi%7D%5Calpha%20_%7Bj%7Dy_%7Bi%7Dy_%7Bj%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29&amp;height=55&amp;id=WsGLu" alt=""  />
+</a>
+</div>
+
+
+       限制条件：
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a37e1f2ea9ca51d09ea6a708467c6af9.svg#card=math&amp;code=0%5Cleqslant%20%5Calpha%20_%7Bi%7D%5Cleqslant%20C&amp;height=18&amp;id=bTvkE">
+<img src="https://cdn.nlark.com/yuque/__latex/a37e1f2ea9ca51d09ea6a708467c6af9.svg#card=math&amp;code=0%5Cleqslant%20%5Calpha%20_%7Bi%7D%5Cleqslant%20C&amp;height=18&amp;id=bTvkE" alt=""  />
+</a>
+</div>
+
+，
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/62bd2ef2733ca708dab8d0ce3f17cf94.svg#card=math&amp;code=%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%3D0&amp;height=53&amp;id=TbNip">
+<img src="https://cdn.nlark.com/yuque/__latex/62bd2ef2733ca708dab8d0ce3f17cf94.svg#card=math&amp;code=%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7D%3D0&amp;height=53&amp;id=TbNip" alt=""  />
+</a>
+</div>
+
+</p>
+<ul>
+<li>回到最初求解W,b</li>
+</ul>
+<p>测试流程：测试样本X，
+若
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/28248f84246ad5d823830db538e56e16.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29%2Bb%5Cgeq%200&amp;height=23&amp;id=MAt1b">
+<img src="https://cdn.nlark.com/yuque/__latex/28248f84246ad5d823830db538e56e16.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29%2Bb%5Cgeq%200&amp;height=23&amp;id=MAt1b" alt=""  />
+</a>
+</div>
+
+，则
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/df58ce483274e952e7a0febc6c0dcf25.svg#card=math&amp;code=y%3D%2B1&amp;height=18&amp;id=C2omL">
+<img src="https://cdn.nlark.com/yuque/__latex/df58ce483274e952e7a0febc6c0dcf25.svg#card=math&amp;code=y%3D%2B1&amp;height=18&amp;id=C2omL" alt=""  />
+</a>
+</div>
+
+
+若
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/ab93f1ef26acaa2980e35f973be67837.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29%2Bb%3C%20%200&amp;height=23&amp;id=pjvrC">
+<img src="https://cdn.nlark.com/yuque/__latex/ab93f1ef26acaa2980e35f973be67837.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29%2Bb%3C%20%200&amp;height=23&amp;id=pjvrC" alt=""  />
+</a>
+</div>
+
+，则
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/0ed775167e5c7887ef5b798190d3ed1b.svg#card=math&amp;code=y%3D-1&amp;height=18&amp;id=URLPW">
+<img src="https://cdn.nlark.com/yuque/__latex/0ed775167e5c7887ef5b798190d3ed1b.svg#card=math&amp;code=y%3D-1&amp;height=18&amp;id=URLPW" alt=""  />
+</a>
+</div>
+
+
+所以我们不需要知道w的确切值，只需要知道上图等式和0的关系即可。</p>
+<ol>
+<li>求解
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/abd46cd04fe5a7222cbd55e6af9083ea.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29&amp;height=23&amp;id=uTqTJ">
+<img src="https://cdn.nlark.com/yuque/__latex/abd46cd04fe5a7222cbd55e6af9083ea.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29&amp;height=23&amp;id=uTqTJ" alt=""  />
+</a>
+</div>
+
+，
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/4cf293a447027d82ed689d0f92b43f6e.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cleft%20%5B%20%5Calpha%20_%7Bi%7Dy_%7Bi%7D%5Cvarphi%20%28X_%7Bi%7D%29%20%5Cright%20%5D%5E%7BT%7D%5Cvarphi%20%28X%29%5C%5C%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7DK%28X_%7Bi%7D%2CX%29&amp;height=110&amp;id=RNB57">
+<img src="https://cdn.nlark.com/yuque/__latex/4cf293a447027d82ed689d0f92b43f6e.svg#card=math&amp;code=%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X%29%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Cleft%20%5B%20%5Calpha%20_%7Bi%7Dy_%7Bi%7D%5Cvarphi%20%28X_%7Bi%7D%29%20%5Cright%20%5D%5E%7BT%7D%5Cvarphi%20%28X%29%5C%5C%3D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7DK%28X_%7Bi%7D%2CX%29&amp;height=110&amp;id=RNB57" alt=""  />
+</a>
+</div>
+
+</li>
+<li>求解b,通过KKT条件以及核函数</li>
+</ol>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="https://cdn.nlark.com/yuque/__latex/a9adacc5b1a0bdf2001e72cf1ef242f6.svg#card=math&amp;code=%5Cforall%20i%3D1%5Csim%20N%5C%5C%0Aor%5C%3A%20%5Cbeta%20_%7Bi%7D%3D0%2Cor%5C%3A%20%5Cxi%20_%7Bi%7D%3D0%5C%5C%0Aor%5C%3A%20%5Calpha%20_%7Bi%7D%3D0%2Cor%5C%3A%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%3D0%5C%5C%0Achoose%5C%3A%20one%5C%3A%200%3C%5Calpha%20_%7Bi%7D%3CC%5CRightarrow%20%5Cbeta%20_%7Bi%7D%3DC-%5Calpha%20_%7Bi%7D%3E0%5C%5C%0Anow%5C%3A%20%5Cbeta%20_%7Bi%7D%5Cneq%200%5CRightarrow%20%5Cxi%20_%7Bi%7D%3D0%5C%5C%0A%5Calpha%20_%7Bi%7D%5Cneq%200%5CRightarrow%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%3D0%5C%5C%0A%5Ctherefore%20b%3D%5Cfrac%7B1-y_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29%7D%7By_%7Bi%7D%7D%3D%5Cfrac%7B1-y_%7Bi%7D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29%7D%7By_%7Bi%7D%7D&amp;height=189&amp;id=KXm5w">
+<img src="https://cdn.nlark.com/yuque/__latex/a9adacc5b1a0bdf2001e72cf1ef242f6.svg#card=math&amp;code=%5Cforall%20i%3D1%5Csim%20N%5C%5C%0Aor%5C%3A%20%5Cbeta%20_%7Bi%7D%3D0%2Cor%5C%3A%20%5Cxi%20_%7Bi%7D%3D0%5C%5C%0Aor%5C%3A%20%5Calpha%20_%7Bi%7D%3D0%2Cor%5C%3A%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%3D0%5C%5C%0Achoose%5C%3A%20one%5C%3A%200%3C%5Calpha%20_%7Bi%7D%3CC%5CRightarrow%20%5Cbeta%20_%7Bi%7D%3DC-%5Calpha%20_%7Bi%7D%3E0%5C%5C%0Anow%5C%3A%20%5Cbeta%20_%7Bi%7D%5Cneq%200%5CRightarrow%20%5Cxi%20_%7Bi%7D%3D0%5C%5C%0A%5Calpha%20_%7Bi%7D%5Cneq%200%5CRightarrow%201%2B%5Cxi%20_%7Bi%7D-y_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29-y_%7Bi%7Db%3D0%5C%5C%0A%5Ctherefore%20b%3D%5Cfrac%7B1-y_%7Bi%7D%5Comega%20%5E%7BT%7D%5Cvarphi%20%28X_%7Bi%7D%29%7D%7By_%7Bi%7D%7D%3D%5Cfrac%7B1-y_%7Bi%7D%5Csum_%7Bi%3D1%7D%5E%7BN%7D%5Calpha%20_%7Bi%7Dy_%7Bi%7DK%28X_%7Bi%7D%2CX_%7Bj%7D%29%7D%7By_%7Bi%7D%7D&amp;height=189&amp;id=KXm5w" alt=""  />
+</a>
+</div>
+
+</p>
+<h2 id="4svm算法总结">4、SVM算法总结</h2>
+<ul>
+<li>训练流程</li>
+</ul>
+<p>已知：yi,yj,xi,xj,K(xi,xj)
+未知：αi,αj,b
+求解αi,αj可以用《<a href="https://blog.csdn.net/weixin_42398658/article/details/83147120?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159135265219724811816128%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159135265219724811816128&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-83147120.first_rank_ecpm_v2_pc_rank_v3&amp;utm_term=smo%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3">SMO算法</a>》进行求解，求解b利用公式即可求解
+实际情况下求解b时，会选取多个α的值求得多个b，然后将多个b的值进行平均化，将平均值作为b最终的取值
+
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="/images/image-20220117151601559.png">
+<img src="/images/image-20220117151601559.png" alt="image-20220117151601559"  />
+</a>
+</div>
+
+</p>
+<ul>
+<li>测试流程</li>
+</ul>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="/images/image-20220117151801323.png">
+<img src="/images/image-20220117151801323.png" alt="image-20220117151801323"  />
+</a>
+</div>
+
+</p>
+</div>
+                    <div class="post_footer">
+                        
+                        <div class="meta">
+                            <div class="info">
+                                <span class="field tags">
+                                    <i class="ri-stack-line"></i>
+                                    
+                                    <a href="https://reatiny.github.io/tags/ml/">ml</a>
+                                    
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                
+<div class="doc_comments">
+    <div class="comments_block_title">发表评论</div>
+    <div id="vcomments"></div>
+</div>
+
+<link rel="stylesheet" href="https://reatiny.github.io/css/comments.css" />
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+    new Valine({
+        el: '#vcomments',
+        appId: 'UATjYWOAAQ32uI8PyjojDFLA-gzGzoHsz',
+        appKey: 'GC5E5PsLk9lwL3jAad8c9ttn',
+        placeholder: ' ',
+        visitor: 'true',
+    })
+</script>
+                
+            </div>
+        </div>
+    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    <footer class="footer">
+    <div class="powered_by">
+        
+    </div>
+
+    <div class="footer_slogan">
+        <span>It&#39;s been a long day without you, my friend</span>
+    </div>
+</footer>
+    <script src="https://reatiny.github.io/js/jquery-3.5.1.min.js"></script>
+<link href="https://reatiny.github.io/css/fancybox.min.css" rel="stylesheet">
+<script src="https://reatiny.github.io/js/fancybox.min.js"></script>
+<script src="https://reatiny.github.io/js/zozo.js"></script>
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+</body>
+
+</html>
