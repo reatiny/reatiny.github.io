@@ -8,6 +8,15 @@
     <language>en</language>
     <lastBuildDate>Tue, 27 Jul 2021 17:49:40 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>About</title>
+      <link>https://reatiny.github.io/about/</link>
+      <pubDate>Mon, 17 Jan 2022 12:23:39 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/about/</guid>
+      <description>Hello, I haven&amp;rsquo;t figured out how to introduce myself yet, maybe in a few days.😜</description>
+    </item>
+    
+    <item>
       <title>Generative Model</title>
       <link>https://reatiny.github.io/posts/generative-model/</link>
       <pubDate>Tue, 27 Jul 2021 17:49:40 +0800</pubDate>
@@ -30,15 +39,6 @@
 &lt;/span&gt;&lt;span class=&#34;gu&#34;&gt;##### H5
 &lt;/span&gt;&lt;span class=&#34;gu&#34;&gt;###### H6
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://reatiny.github.io/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://reatiny.github.io/about/</guid>
-      <description></description>
     </item>
     
   </channel>
