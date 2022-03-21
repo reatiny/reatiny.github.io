@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Ray</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Jul 2021 17:49:40 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Mar 2022 13:25:35 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Two_sorting_algorithms</title>
+      <link>https://reatiny.github.io/posts/two_sorting_algorithms/</link>
+      <pubDate>Mon, 21 Mar 2022 13:25:35 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/posts/two_sorting_algorithms/</guid>
+      <description>两个排序算法 快速排序 代码中的三个细节点： pivot: get value not index left &amp;lt;= right 保证两个子区间不交叉 A[left] &amp;lt; pivot not &amp;lt;= 如果数组中的元素都相同，则 left 一直右移至溢出 public class Solution { public void sortIntegers(int[] A) { if(A == null || A.length ==0) { return; } quickSort(A, 0, A.length - 1); } public void quickSort(int A[], int start, int end) { if (start &amp;gt;=</description>
+    </item>
+    
     <item>
       <title>Generative Model</title>
       <link>https://reatiny.github.io/posts/generative-model/</link>

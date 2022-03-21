@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ray" />
+	
+	
+	
+	<title>Two_sorting_algorithms ｜ Ray</title>
+	
+    
+    
+    <meta name="description" content="两个排序算法 快速排序 代码中的三个细节点： pivot: get value not index left &amp;lt;= right 保证两个子区间不交叉 A[left] &amp;lt; pivot not &amp;lt;= 如果数组中的元素都相同，则 left 一直右移至溢出 public class Solution { public void sortIntegers(int[] A) { if(A == null || A.length ==0) { return; } quickSort(A, 0, A.length - 1); } public void quickSort(int A[], int start, int end) { if (start &amp;gt;=" />
+    
+
+    
+    
+    <meta name="keywords" content="ml, dl, nlp, theme, zozo" />
+    
+
+	
+    
+    <link rel="shortcut icon" href="https://reatiny.github.io/images/favicon.JPG" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://reatiny.github.io/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://reatiny.github.io/css/zozo.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://reatiny.github.io/css/highlight.css" />
+
+    
+    
+</head>
+
+<body>
+    <div class="main animate__animated animate__fadeInDown">
+        <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/posts/">Archive</a>
+            </li>
+            
+            <li>
+                <a href="/tags/">Tags</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        <a id="menu_icon"><i class="ri-menu-line"></i></a>
+    </div>
+</div>
+        <div class="header animated fadeInDown">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="https://reatiny.github.io/">
+                    <span>Ray</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title">小睿仔</p>
+            <div class="my_socials">
+                
+                
+                <a href="https://github.com/reatiny" title="github" target="_blank"><i class="ri-github-fill"></i></a>
+                
+                
+                <a href="https://reatiny.github.io/index.xml" type="application/rss+xml" title="rss" target="_blank"><i
+                        class="ri-rss-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="content">
+            <div class="post_page">
+                <div class="post animate__animated animate__fadeInDown">
+                    <div class="post_title post_detail_title">
+                        <h2><a href='/posts/two_sorting_algorithms/'>Two_sorting_algorithms</a></h2>
+                        <span class="date">2022.03.21</span>
+                    </div>
+                    <div class="post_content markdown"><h1 id="两个排序算法">两个排序算法</h1>
+<h2 id="快速排序">快速排序</h2>
+<p>
+
+<div class="fancybox">
+<a data-fancybox="gallery" href="/images/image-20220321133812059.png">
+<img src="/images/image-20220321133812059.png" alt="image-20220321133812059"  />
+</a>
+</div>
+
+</p>
+<p>代码中的三个细节点：</p>
+<ol>
+<li>pivot: get value not index</li>
+<li>left &lt;= right 保证两个子区间不交叉</li>
+<li>A[left] &lt; pivot not &lt;= 如果数组中的元素都相同，则 left 一直右移至溢出</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sortIntegers</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">A</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span><span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span> <span class="n">A</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">start</span><span class="o">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">end</span><span class="o">;</span>
+        <span class="c1">// 1. pivot: get value not index
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">A</span><span class="o">[(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">];</span>
+
+        <span class="c1">// 2. left &lt;= right 
+</span><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 3. A[left] &lt; pivot not &lt;=
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">A</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">left</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">right</span><span class="o">--;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+                <span class="n">A</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">right</span><span class="o">];</span>
+                <span class="n">A</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+                <span class="n">left</span><span class="o">++;</span>
+                <span class="n">right</span><span class="o">--;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span>
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div><h2 id="归并排序">归并排序</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sortIntegers</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">A</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span><span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">A</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+        <span class="n">mergeSort</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">,</span> <span class="n">temp</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">mergeSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temp</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">mergeSort</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">,</span> <span class="n">temp</span><span class="o">);</span>
+        <span class="n">mergeSort</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">end</span><span class="o">,</span> <span class="n">temp</span><span class="o">);</span>
+        <span class="n">merge</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">,</span> <span class="n">temp</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">merge</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">temp</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">leftIndex</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">rightIndex</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">leftIndex</span> <span class="o">&lt;=</span> <span class="n">middle</span> <span class="o">&amp;&amp;</span> <span class="n">rightIndex</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">leftIndex</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="o">[</span><span class="n">rightIndex</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">temp</span><span class="o">[</span><span class="n">index</span><span class="o">++]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">leftIndex</span><span class="o">++];</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">temp</span><span class="o">[</span><span class="n">index</span><span class="o">++]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">rightIndex</span><span class="o">++];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">leftIndex</span> <span class="o">&lt;=</span> <span class="n">middle</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">temp</span><span class="o">[</span><span class="n">index</span><span class="o">++]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">leftIndex</span><span class="o">++];</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">rightIndex</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">temp</span><span class="o">[</span><span class="n">index</span><span class="o">++]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">rightIndex</span><span class="o">++];</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div><h2 id="区别">区别</h2>
+<ul>
+<li>
+<p>时间复杂度：</p>
+<ul>
+<li>快速排序(平均复杂度) ： O(nlogn)</li>
+<li>归并排序(稳定复杂度) ： O(nlogn)</li>
+</ul>
+</li>
+<li>
+<p>空间复杂度：</p>
+<ul>
+<li>快速排序 ： O(1)</li>
+<li>归并排序 ： O(n)</li>
+</ul>
+</li>
+<li>
+<p>稳定性：快速排序不稳定，归并排序稳定</p>
+</li>
+<li>
+<p>快速排序从整体到局部，归并排序从局部到整体</p>
+</li>
+</ul>
+</div>
+                    <div class="post_footer">
+                        
+                    </div>
+                </div>
+                
+                
+                
+
+<span id="/posts/two_sorting_algorithms/" class="leancloud_visitors" data-flag-title="Two_sorting_algorithms">
+    <em class="post-meta-item-text" style="font-size: 14px;color: #383838;">当前页访问次数:  </em>
+    <i class="leancloud-visitors-count">loading</i>
+</span>
+
+<div class="doc_comments">
+    <div class="comments_block_title">发表评论(昵称请输入您的qq号)</div>
+    <div id="vcomments"></div>
+</div>
+
+<link rel="stylesheet" href="https://reatiny.github.io/css/comments.css" />
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+    new Valine({
+        el: '#vcomments',
+        appId: 'UATjYWOAAQ32uI8PyjojDFLA-gzGzoHsz',
+        appKey: 'GC5E5PsLk9lwL3jAad8c9ttn',
+        placeholder: ' ',
+        visitor: 'true',
+        avatar: 'monsterid',
+        enableQQ: true
+    })
+</script>
+                
+            </div>
+        </div>
+    </div>
+    <a id="back_to_top" href="#" class="back_to_top"><i class="ri-arrow-up-s-line"></i></a>
+    <footer class="footer">
+    <div class="powered_by">
+        
+    </div>
+
+    <div class="footer_slogan">
+        <span></span>
+    </div>
+</footer>
+    <script src="https://reatiny.github.io/js/jquery-3.5.1.min.js"></script>
+<link href="https://reatiny.github.io/css/fancybox.min.css" rel="stylesheet">
+<script src="https://reatiny.github.io/js/fancybox.min.js"></script>
+<script src="https://reatiny.github.io/js/zozo.js"></script>
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+</body>
+
+</html>
