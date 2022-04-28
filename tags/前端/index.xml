@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端 on Ray</title>
+    <link>https://reatiny.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 前端 on Ray</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 28 Apr 2022 10:41:16 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Javascript基础</title>
+      <link>https://reatiny.github.io/posts/javascript/</link>
+      <pubDate>Thu, 28 Apr 2022 10:41:16 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/posts/javascript/</guid>
+      <description>JavaScript JavaScript负责页面中的的行为。 它是一门运行在浏览器端的脚本语言。如今，JavaScript 不仅可以在浏览器中执行，也可以在服务端执行，甚至可以在任意搭载了 JavaScript 引擎 的设备中执行。 浏览器中嵌入了</description>
+    </item>
+    
+  </channel>
+</rss>
