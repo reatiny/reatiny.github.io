@@ -6,14 +6,14 @@
     <description>Recent content on Ray</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 28 Apr 2022 10:41:16 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Jul 2022 16:35:09 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Javascript基础</title>
-      <link>https://reatiny.github.io/posts/javascript/</link>
-      <pubDate>Thu, 28 Apr 2022 10:41:16 +0800</pubDate>
+      <title>数组双指针</title>
+      <link>https://reatiny.github.io/posts/%E6%95%B0%E7%BB%84%E5%8F%8C%E6%8C%87%E9%92%88/</link>
+      <pubDate>Fri, 29 Jul 2022 16:35:09 +0800</pubDate>
       
-      <guid>https://reatiny.github.io/posts/javascript/</guid>
-      <description>JavaScript JavaScript负责页面中的的行为。 它是一门运行在浏览器端的脚本语言。如今，JavaScript 不仅可以在浏览器中执行，也可以在服务端执行，甚至可以在任意搭载了 JavaScript 引擎 的设备中执行。 浏览器中嵌入了</description>
+      <guid>https://reatiny.github.io/posts/%E6%95%B0%E7%BB%84%E5%8F%8C%E6%8C%87%E9%92%88/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;双指针：快慢指针、左右指针&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -22,7 +22,9 @@
       <pubDate>Mon, 21 Mar 2022 13:25:35 +0800</pubDate>
       
       <guid>https://reatiny.github.io/posts/two_sorting_algorithms/</guid>
-      <description>两个排序算法 快速排序 代码中的三个细节点： pivot: get value not index left &amp;lt;= right 保证两个子区间不交叉 A[left] &amp;lt; pivot not &amp;lt;= 如果数组中的元素都相同，则 left 一直右移至溢出 public class Solution { public void sortIntegers(int[] A) { if(A == null || A.length ==0) { return; } quickSort(A, 0, A.length - 1); } public void quickSort(int A[], int start, int end) { if (start &amp;gt;=</description>
+      <description>&lt;h1 id=&#34;两个排序算法&#34;&gt;两个排序算法&lt;/h1&gt;
+&lt;h2 id=&#34;快速排序&#34;&gt;快速排序&lt;/h2&gt;
+&lt;img src=&#34;https://reatiny.github.io/images/image-20220321133812059.png&#34; alt=&#34;image-20220321133812059&#34; style=&#34;zoom: 33%;&#34; /&gt;</description>
     </item>
     
     <item>
@@ -40,7 +42,8 @@
       <pubDate>Tue, 27 Jul 2021 17:49:40 +0800</pubDate>
       
       <guid>https://reatiny.github.io/posts/generative-model/</guid>
-      <description>Generative Model Generation Network as Generator 之前所学过的神经网络，都是一个function，输入一个X输出一个Y。我们已经知道各式各样的network，可以处理不同的输入X和输出Y。 我们学到的输入X：可以是一张图片，可以是一个seq</description>
+      <description>&lt;h3 id=&#34;network-as-generator&#34;&gt;Network as Generator&lt;/h3&gt;
+&lt;img src=&#34;https://reatiny.github.io/images/image-20210727182022779.png&#34; alt=&#34;image-20210727182022779&#34; style=&#34;zoom:67%;&#34; /&gt;</description>
     </item>
     
     <item>

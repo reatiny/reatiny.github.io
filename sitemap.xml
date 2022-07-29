@@ -2,25 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://reatiny.github.io/posts/javascript/</loc>
-    <lastmod>2022-04-28T10:41:16+08:00</lastmod>
-  </url><url>
     <loc>https://reatiny.github.io/posts/</loc>
-    <lastmod>2022-04-28T10:41:16+08:00</lastmod>
+    <lastmod>2022-07-29T16:35:09+08:00</lastmod>
   </url><url>
     <loc>https://reatiny.github.io/</loc>
-    <lastmod>2022-04-28T10:41:16+08:00</lastmod>
+    <lastmod>2022-07-29T16:35:09+08:00</lastmod>
   </url><url>
     <loc>https://reatiny.github.io/tags/</loc>
-    <lastmod>2022-04-28T10:41:16+08:00</lastmod>
+    <lastmod>2022-07-29T16:35:09+08:00</lastmod>
   </url><url>
-    <loc>https://reatiny.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2022-04-28T10:41:16+08:00</lastmod>
-  </url><url>
-    <loc>https://reatiny.github.io/posts/two_sorting_algorithms/</loc>
-    <lastmod>2022-03-21T13:25:35+08:00</lastmod>
+    <loc>https://reatiny.github.io/posts/%E6%95%B0%E7%BB%84%E5%8F%8C%E6%8C%87%E9%92%88/</loc>
+    <lastmod>2022-07-29T16:35:09+08:00</lastmod>
   </url><url>
     <loc>https://reatiny.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-07-29T16:35:09+08:00</lastmod>
+  </url><url>
+    <loc>https://reatiny.github.io/posts/two_sorting_algorithms/</loc>
     <lastmod>2022-03-21T13:25:35+08:00</lastmod>
   </url><url>
     <loc>https://reatiny.github.io/about/</loc>

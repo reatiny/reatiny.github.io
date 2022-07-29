@@ -12,7 +12,7 @@
 	
     
     
-    <meta name="description" content="Generative Model Generation Network as Generator 之前所学过的神经网络，都是一个function，输入一个X输出一个Y。我们已经知道各式各样的network，可以处理不同的输入X和输出Y。 我们学到的输入X：可以是一张图片，可以是一个seq" />
+    <meta name="description" content="Network as Generator " />
     
 
     
@@ -92,22 +92,12 @@
                         <h2><a href='/posts/generative-model/'>Generative Model</a></h2>
                         <span class="date">2021.07.27</span>
                     </div>
-                    <div class="post_content markdown"><h1 id="generative-model">Generative Model</h1>
-<h2 id="generation">Generation</h2>
-<h3 id="network-as-generator">Network as Generator</h3>
+                    <div class="post_content markdown"><h3 id="network-as-generator">Network as Generator</h3>
+<img src="/images/image-20210727182022779.png" alt="image-20210727182022779" style="zoom:67%;" />
 <p>之前所学过的神经网络，都是一个function，输入一个<em>X</em>输出一个<em>Y</em>。我们已经知道各式各样的network，可以处理不同的输入<em>X</em>和输出<em>Y</em>。</p>
 <p>我们学到的输入<em>X</em>：可以是一张图片，可以是一个sequence</p>
 <p>我们学到的输出<em>Y</em>：可以是一个数值，可以是一个类别，也可以是一个sequence</p>
 <p>接下来我们要进入一个新的主题：生成。我们把network,当做一个generator来用，特别地，会在network的输入上再加一个随机变量<em>Z</em>，这个变量是从某个分布sample出来；随着sample到的Z不同,Y的输出也就不一样,所以这个时候我们的network输出,不再是单一一个固定的东西,而变成了一个复杂的distribution。<strong>这种可以输出一个distribution的network,我们就叫它generator。</strong></p>
-<p>
-
-<div class="fancybox">
-<a data-fancybox="gallery" href="/images/image-20210727182022779.png">
-<img src="/images/image-20210727182022779.png" alt="image-20210727182022779"  />
-</a>
-</div>
-
-</p>
 <p>那network怎么同时处理X与Z呢，有很多方法，取决于你的network架构。例如，把X和Z两个向量直接拼接成一个更长的向量作为输入；或者当X和Z的长度相同时将它们相加作为输入等等。</p>
 <p>Z的特别之处在于它是<strong>不固定</strong>的，每一次我们用这个network的时候,都会随机生成一个Z，所以Z每次都不一样，它是从一个distribution里面sample出来的。我们要求这个分布足够简单，我们知道这个式子，<strong>这样我们才能sample，我们仅仅做sample就可以了。</strong></p>
 <h3 id="why-distribution">Why distribution</h3>
@@ -507,8 +497,7 @@
 </a>
 </div>
 
-</p>
-</div>
+</p></div>
                     <div class="post_footer">
                         
                         <div class="meta">
