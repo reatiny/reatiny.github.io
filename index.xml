@@ -6,7 +6,16 @@
     <description>Recent content on Ray</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 29 Jul 2022 16:35:09 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Sep 2022 15:39:28 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM</title>
+      <link>https://reatiny.github.io/posts/jvm/</link>
+      <pubDate>Tue, 27 Sep 2022 15:39:28 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/posts/jvm/</guid>
+      <description>JVM概述 基本介绍 JVM：全称 Java Virtual Machine，即 Java 虚拟机，一种规范，本身是一个虚拟计算机，直接和操作系统进行交互，与硬件不直接交互，而操作系统可以帮我们完成和硬件进行交互的工作 特点： Java 虚拟机基于二</description>
+    </item>
+    
     <item>
       <title>数组双指针</title>
       <link>https://reatiny.github.io/posts/%E6%95%B0%E7%BB%84%E5%8F%8C%E6%8C%87%E9%92%88/</link>
@@ -31,7 +40,7 @@
       <pubDate>Tue, 27 Jul 2021 17:49:40 +0800</pubDate>
       
       <guid>https://reatiny.github.io/posts/generative-model/</guid>
-      <description>&lt;h3 id=&#34;network-as-generator&#34;&gt;Network as Generator&lt;/h3&gt;
+      <description>&lt;h1 id=&#34;network-as-generator&#34;&gt;Network as Generator&lt;/h1&gt;
 &lt;img src=&#34;https://reatiny.github.io/images/image-20210727182022779.png&#34; alt=&#34;image-20210727182022779&#34; style=&#34;zoom:67%;&#34; /&gt;</description>
     </item>
     

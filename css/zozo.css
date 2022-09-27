@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /*basic styles starts*/
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
 html {
   background-color: #f7f7f7;
   -webkit-font-smoothing: antialiased;
@@ -23,7 +26,7 @@ html::-webkit-scrollbar-thumb {
 
 body {
   color: #333333;
-  font-family: "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "-apple-system-font", Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 16px;
   width: 100%;
   background-color: #f7f7f7;
@@ -70,8 +73,9 @@ hr {
   background: #ffffff;
   -webkit-box-shadow: 0 10px 20px 0 rgba(236, 236, 236, 0.86);
           box-shadow: 0 10px 20px 0 rgba(236, 236, 236, 0.86);
-  width: 900px;
-  margin: 60px auto 0;
+  width: 880px;
+  margin: 60px 300px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .content {
@@ -160,7 +164,9 @@ hr {
 }
 
 .header .site_title_container .site_title a span {
+  font-family: 'Dancing Script', cursive;
   display: block;
+  font-weight: 700;
 }
 
 .header .site_title_container .site_title a:hover {
@@ -255,7 +261,7 @@ hr {
 .post .post_content a {
   text-decoration: none;
   letter-spacing: 1px;
-  color: #e42b2b;
+  color: #0169c2;
 }
 
 .post .post_content a:hover {
@@ -567,8 +573,8 @@ hr {
 .markdown b,
 .markdown em {
   padding: 1px 2px;
-  background-color: #C4D7F2;
-  font-weight: normal;
+  /*background-color: #C4D7F2;*/
+  font-weight: 500;
 }
 
 .markdown .fancybox {

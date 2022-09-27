@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on Ray</title>
+    <link>https://reatiny.github.io/tags/java/</link>
+    <description>Recent content in java on Ray</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 27 Sep 2022 15:39:28 +0800</lastBuildDate><atom:link href="https://reatiny.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM</title>
+      <link>https://reatiny.github.io/posts/jvm/</link>
+      <pubDate>Tue, 27 Sep 2022 15:39:28 +0800</pubDate>
+      
+      <guid>https://reatiny.github.io/posts/jvm/</guid>
+      <description>JVM概述 基本介绍 JVM：全称 Java Virtual Machine，即 Java 虚拟机，一种规范，本身是一个虚拟计算机，直接和操作系统进行交互，与硬件不直接交互，而操作系统可以帮我们完成和硬件进行交互的工作 特点： Java 虚拟机基于二</description>
+    </item>
+    
+  </channel>
+</rss>
