@@ -732,14 +732,6 @@ a.back_to_top:hover span {
   }
 }
 
-@media (max-width: 1080px) {
-    .toc-wcr {
-        display: none;
-    }
-    .main animate__animated animate__fadeInDown {
-      max-width: 100%;
-    }
 
-}
 
 /*animation ends*/
